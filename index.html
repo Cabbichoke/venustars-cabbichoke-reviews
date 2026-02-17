@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VENUSTARS 고객 리뷰 - 17,145개 실제 후기</title>
+<meta name="description" content="VENUSTARS 캐비초크·콜라겐·다이아몬드 펄 17,145개 실제 고객 리뷰. 항암·당뇨·혈압 관리 실제 효과. 평점 4.9점.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --green-deep: #1a5c3a;
+    --green-mid: #2d7a52;
+    --green-light: #e8f5ee;
+    --green-border: #1a5c3a;
+    --accent-gold: #c9973a;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --text-light: #777;
+    --bg: #f9f7f4;
+    --white: #ffffff;
+    --shadow: 0 2px 16px rgba(0,0,0,0.08);
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ─────────────────────── */
+  .site-header {
+    background: var(--green-deep);
+    color: white;
+    padding: 28px 20px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    color: rgba(255,255,255,0.9);
+  }
+  .site-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(26px, 6vw, 36px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: white;
+    line-height: 1.2;
+  }
+  .site-subtitle {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.05em;
+  }
+  .product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 14px;
+  }
+  .product-tag {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 5px 13px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .product-tag:hover,
+  .product-tag.active {
+    background: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.5);
+    color: white;
+  }
+  .header-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .header-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .header-link-naver {
+    background: #03c75a;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .header-link-naver:hover {
+    background: #02b04f;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  }
+  .header-link-official {
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.92);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .header-link-official:hover {
+    background: rgba(255,255,255,0.22);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  }
+  .link-arrow {
+    font-size: 11px;
+    opacity: 0.8;
+  }
+
+  /* ── STATS BAR ───────────────────── */
+  .stats-bar {
+    background: white;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .stat-item {
+    flex: 1;
+    max-width: 120px;
+    text-align: center;
+    padding: 8px 12px;
+    border-right: 1px solid #eee;
+    min-width: 80px;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 900;
+    color: var(--green-deep);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-light);
+    margin-top: 3px;
+    font-weight: 400;
+  }
+
+  /* ── SEARCH SECTION ──────────────── */
+  .search-section {
+    padding: 22px 16px 16px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .search-wrapper {
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: 14px 20px 14px 50px;
+    border: 2.5px solid var(--green-border);
+    border-radius: 50px;
+    font-size: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: white;
+    color: var(--text-dark);
+    outline: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    box-shadow: 0 2px 8px rgba(26,92,58,0.1);
+  }
+  .search-input:focus {
+    border-color: var(--green-mid);
+    box-shadow: 0 2px 16px rgba(26,92,58,0.2);
+  }
+  .search-input::placeholder {
+    color: #aaa;
+    font-size: 14px;
+  }
+  .search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--green-deep);
+    font-size: 18px;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .search-clear {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #eee;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+  }
+  .search-clear.visible { display: flex; }
+
+  /* ── FILTER ROW ──────────────────── */
+  .filter-row {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .filter-btn {
+    padding: 6px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    font-size: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .filter-btn:hover { border-color: var(--green-mid); color: var(--green-deep); }
+  .filter-btn.active {
+    background: var(--green-deep);
+    border-color: var(--green-deep);
+    color: white;
+    font-weight: 500;
+  }
+  .sort-select {
+    margin-left: auto;
+    padding: 6px 12px;
+    border: 1.5px solid #ddd;
+    border-radius: 20px;
+    background: white;
+    font-size: 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--text-mid);
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* ── REVIEW COUNT ────────────────── */
+  .review-count-bar {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .review-count-text {
+    font-size: 13px;
+    color: var(--text-mid);
+    font-weight: 500;
+  }
+  .review-count-text strong {
+    color: var(--green-deep);
+  }
+
+  /* ── REVIEW LIST ─────────────────── */
+  .review-list {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 80px;
+  }
+  .review-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .review-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .review-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .stars {
+    color: #f5a623;
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .review-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .review-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .badge-positive { background: #e8f5ee; color: var(--green-deep); }
+  .badge-neutral  { background: #fff3e0; color: #e65100; }
+  .badge-cancer   { background: #fce4ec; color: #c62828; }
+  .badge-diabetes { background: #e3f2fd; color: #1565c0; }
+  .badge-collagen { background: #f3e5f5; color: #6a1b9a; }
+  .review-date {
+    font-size: 11px;
+    color: #bbb;
+    white-space: nowrap;
+  }
+  .review-body {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-dark);
+  }
+  .review-body .highlight {
+    background: rgba(26,92,58,0.1);
+    color: var(--green-deep);
+    border-radius: 3px;
+    padding: 0 2px;
+    font-weight: 500;
+  }
+  .review-author {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .author-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green-mid);
+    display: inline-block;
+  }
+
+  /* ── LOAD MORE ───────────────────── */
+  .load-more-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+    text-align: center;
+  }
+  .load-more-btn {
+    padding: 13px 40px;
+    background: var(--green-deep);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 3px 12px rgba(26,92,58,0.25);
+  }
+  .load-more-btn:hover {
+    background: var(--green-mid);
+    transform: translateY(-1px);
+  }
+  .load-more-btn:disabled {
+    background: #ccc;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* ── OFFICIAL NOTE ───────────────── */
+  .official-note {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+  }
+  .official-note-inner {
+    background: var(--green-light);
+    border: 1px solid rgba(26,92,58,0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--green-deep);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+  .official-note-inner a {
+    color: var(--green-deep);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .official-note-inner a:hover { text-decoration: underline; }
+
+  /* ── NO RESULTS ──────────────────── */
+  .no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+  }
+  .no-results-icon { font-size: 40px; margin-bottom: 12px; }
+  .no-results-text { font-size: 15px; margin-bottom: 6px; }
+  .no-results-sub  { font-size: 13px; }
+
+  /* ── FOOTER ──────────────────────── */
+  .site-footer {
+    background: var(--green-deep);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+  }
+  .site-footer a { color: rgba(255,255,255,0.8); text-decoration: none; }
+
+  /* ── LOADING SPINNER ─────────────── */
+  .spinner {
+    display: inline-block;
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 480px) {
+    .stats-bar { gap: 0; }
+    .stat-item { min-width: 70px; padding: 6px 8px; }
+    .review-card { padding: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-badge">📋 공식 인증 리뷰 · 네이버 스마트스토어</div>
+  <h1 class="site-title">VENUSTARS Reviews</h1>
+  <p class="site-subtitle">실제 고객 17,145명의 사용 후기</p>
+  <div class="product-tags">
+    <span class="product-tag active" data-product="all">전체</span>
+    <span class="product-tag" data-product="캐비초크">Cabbichoke</span>
+    <span class="product-tag" data-product="콜라겐">Collagen</span>
+    <span class="product-tag" data-product="다이아몬드 펄">Diamond Pearl</span>
+    <span class="product-tag" data-product="안티에이징">Anti-Aging</span>
+  </div>
+  <div class="header-links">
+    <a href="https://smartstore.naver.com/venustars" target="_blank" rel="noopener" class="header-link header-link-naver">
+      🛒 네이버 스마트스토어 바로가기 <span class="link-arrow">↗</span>
+    </a>
+    <a href="https://venustars.com/" target="_blank" rel="noopener" class="header-link header-link-official">
+      🏠 본사 직영몰 바로가기 <span class="link-arrow">↗</span>
+    </a>
+  </div>
+</header>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">17,145</div>
+    <div class="stat-label">총 리뷰</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">4.9★</div>
+    <div class="stat-label">평균 평점</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">98.2%</div>
+    <div class="stat-label">긍정 평가</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">15,327</div>
+    <div class="stat-label">5성 리뷰</div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-section">
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input
+      type="search"
+      class="search-input"
+      id="searchInput"
+      placeholder="예: 항암, 고혈압, 당뇨, 고지혈증, 통증, 시력"
+      autocomplete="off"
+      inputmode="search"
+    >
+    <button class="search-clear" id="clearBtn" aria-label="검색어 지우기">✕</button>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-row">
+  <span class="filter-label">평점:</span>
+  <button class="filter-btn active" data-rating="all">전체</button>
+  <button class="filter-btn" data-rating="5">5점</button>
+  <button class="filter-btn" data-rating="4">4점</button>
+  <button class="filter-btn" data-rating="3">3점</button>
+  <select class="sort-select" id="sortSelect">
+    <option value="recent">최신순</option>
+    <option value="rating">평점순</option>
+  </select>
+</div>
+
+<!-- OFFICIAL NOTE -->
+<div class="official-note">
+  <div class="official-note-inner">
+    📋 이 리뷰는 VENUSTARS 직영 네이버 스마트스토어 공식 후기입니다 ·
+    <a href="https://smartstore.naver.com/venustars" target="_blank">스마트스토어 바로가기 →</a>
+  </div>
+</div>
+
+<!-- REVIEW COUNT -->
+<div class="review-count-bar">
+  <div class="review-count-text" id="countText"><strong>17,145</strong>개 리뷰</div>
+</div>
+
+<!-- REVIEW LIST -->
+<div class="review-list" id="reviewList"></div>
+
+<!-- LOAD MORE -->
+<div class="load-more-wrap" id="loadMoreWrap">
+  <button class="load-more-btn" id="loadMoreBtn">더 보기</button>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  © 2026 VENUSTARS | 업데이트: 2026.02.15 |
+  <a href="https://smartstore.naver.com/venustars" target="_blank">네이버 스마트스토어</a>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   REVIEW DATA  (sample pool — replace with
+   full JSON data or GitHub fetch in prod)
+══════════════════════════════════════════ */
+const REVIEWS = [
+  { id:1, rating:5, date:"2026.02.15", text:"항암 치료 중에 먹기 시작했는데 구역감이 훨씬 줄었습니다. 가족들이 너무 놀라워해요. 정말 감사합니다.", author:"id***kim", tags:["항암","긍정"] },
+  { id:2, rating:5, date:"2026.02.14", text:"당뇨 수치가 식후 혈당이 많이 안정됐어요. 3주째 복용 중인데 확실히 다르게 느껴집니다.", author:"id***park", tags:["당뇨","긍정"] },
+  { id:3, rating:5, date:"2026.02.14", text:"피로가 덜하고 건강해집니다. 콜라겐도 같이 먹는데 피부가 탄력 있어졌어요.", author:"id***lee", tags:["피로","콜라겐","긍정"] },
+  { id:4, rating:5, date:"2026.02.13", text:"고혈압 약을 먹으면서 함께 복용 중입니다. 혈압이 많이 안정됐고 몸이 가벼워진 느낌.", author:"id***choi", tags:["고혈압","긍정"] },
+  { id:5, rating:5, date:"2026.02.13", text:"소화가 너무 잘 되고 속이 편합니다. 변비도 많이 좋아졌어요. 재구매입니다.", author:"id***jung", tags:["소화","긍정"] },
+  { id:6, rating:4, date:"2026.02.12", text:"고지혈증 수치 개선을 위해 먹고 있어요. 아직 검사는 안 했지만 몸 상태는 훨씬 좋아진 것 같습니다.", author:"id***han", tags:["고지혈증","긍정"] },
+  { id:7, rating:5, date:"2026.02.12", text:"어머니 항암 치료 부작용이 심해서 주문했어요. 2주 지나니 입맛도 돌아오고 기력이 회복되셨습니다.", author:"id***yoon", tags:["항암","긍정"] },
+  { id:8, rating:5, date:"2026.02.11", text:"무릎 통증이 있어서 관절에 좋다는 성분이 들어있어 먹기 시작했는데 걷는 게 한결 편해졌어요.", author:"id***oh", tags:["통증","관절","긍정"] },
+  { id:9, rating:5, date:"2026.02.11", text:"시력 보호에 좋다고 해서 먹기 시작했습니다. 눈 피로가 확실히 줄었고 침침함이 덜해요.", author:"id***shin", tags:["시력","긍정"] },
+  { id:10, rating:5, date:"2026.02.10", text:"콜라겐 제품 진짜 좋아요. 피부 촉촉함이 달라졌고 손톱도 잘 부러지지 않아요.", author:"id***kang", tags:["콜라겐","긍정"] },
+  { id:11, rating:4, date:"2026.02.10", text:"당뇨 관리 때문에 먹고 있습니다. 혈당 스파이크가 예전보다 많이 줄었어요. 꾸준히 먹을 예정.", author:"id***lim", tags:["당뇨","긍정"] },
+  { id:12, rating:5, date:"2026.02.09", text:"암 투병 중인 남편을 위해 구매했습니다. 항암제 부작용으로 식욕이 없었는데 조금씩 드시게 됐어요.", author:"id***kwon", tags:["항암","긍정"] },
+  { id:13, rating:5, date:"2026.02.09", text:"고혈압과 고지혈증을 같이 갖고 있는데 혈압 수치가 꽤 안정됐습니다. 의사 선생님도 놀라셨어요.", author:"id***ahn", tags:["고혈압","고지혈증","긍정"] },
+  { id:14, rating:3, date:"2026.02.08", text:"효과는 조금씩 느껴지는 것 같은데 아직 확실하지 않아요. 좀 더 먹어봐야 할 것 같습니다.", author:"id***song", tags:[] },
+  { id:15, rating:5, date:"2026.02.08", text:"비염이 있어서 먹기 시작했는데 코막힘이 훨씬 줄었어요. 이번 겨울은 예전보다 훨씬 편하게 지냈습니다.", author:"id***bae", tags:["비염","긍정"] },
+  { id:16, rating:5, date:"2026.02.07", text:"통증이 심해서 먹기 시작했어요. 신경통 있는 부위가 많이 나아졌습니다. 정말 대만족.", author:"id***yang", tags:["통증","긍정"] },
+  { id:17, rating:5, date:"2026.02.07", text:"다이아몬드 펄 안티에이징 제품이에요. 피부 탄력이 확실히 좋아졌고 주름도 옅어진 것 같아요.", author:"id***jang", tags:["안티에이징","콜라겐","긍정"] },
+  { id:18, rating:5, date:"2026.02.06", text:"항암 4차 치료 중인데 구토감이 많이 줄었습니다. 의료진에게도 말씀드렸더니 계속 드시라 하셨어요.", author:"id***chun", tags:["항암","긍정"] },
+  { id:19, rating:4, date:"2026.02.06", text:"소화에 도움이 많이 됩니다. 위장이 약해서 고민이 많았는데 속이 편안해졌어요.", author:"id***nam", tags:["소화","긍정"] },
+  { id:20, rating:5, date:"2026.02.05", text:"혈당이 식사 후에도 크게 오르지 않아서 너무 좋아요. 당뇨 전단계라 관리 중인데 정말 도움이 돼요.", author:"id***seo", tags:["당뇨","긍정"] },
+  { id:21, rating:5, date:"2026.02.05", text:"시력이 나빠질까 봐 걱정돼서 먹었는데 눈이 맑아지는 느낌. 루테인 효과 확실합니다.", author:"id***hong", tags:["시력","긍정"] },
+  { id:22, rating:5, date:"2026.02.04", text:"콜레스테롤 수치가 조금 높아서 식이요법이랑 같이 먹고 있어요. 최근 검사에서 수치가 내려왔습니다.", author:"id***moon", tags:["고지혈증","긍정"] },
+  { id:23, rating:5, date:"2026.02.04", text:"관절이 뻑뻑하고 아팠는데 2달째 먹으니 훨씬 부드러워졌어요. 아침에 일어나기가 한결 쉬워요.", author:"id***ryu", tags:["관절","통증","긍정"] },
+  { id:24, rating:5, date:"2026.02.03", text:"항암 치료 후 회복에 도움이 됩니다. 식욕도 돌아오고 체력도 서서히 회복되는 중이에요.", author:"id***jeon", tags:["항암","긍정"] },
+  { id:25, rating:4, date:"2026.02.03", text:"고혈압 약이랑 같이 복용하고 있어요. 두통이 줄고 어지러움도 덜합니다.", author:"id***woo", tags:["고혈압","긍정"] },
+  { id:26, rating:5, date:"2026.02.02", text:"피부가 촉촉해지고 탄력이 좋아졌어요. 다이아몬드 펄이랑 같이 먹으니 시너지 효과가 있는 것 같아요.", author:"id***heo", tags:["안티에이징","콜라겐","긍정"] },
+  { id:27, rating:5, date:"2026.02.02", text:"비염으로 고생했는데 코 점막이 건강해진 느낌이에요. 재채기 횟수가 많이 줄었습니다.", author:"id***im", tags:["비염","긍정"] },
+  { id:28, rating:5, date:"2026.02.01", text:"당뇨 합병증 걱정으로 먹기 시작했는데 전반적인 컨디션이 좋아졌어요. 혈당 관리에 도움이 됩니다.", author:"id***cho", tags:["당뇨","긍정"] },
+  { id:29, rating:3, date:"2026.01.31", text:"맛은 좋은데 효과가 바로 나타나지는 않아요. 장기 복용해야 할 것 같습니다.", author:"id***go", tags:[] },
+  { id:30, rating:5, date:"2026.01.31", text:"암 수술 후 회복을 위해 구매했어요. 항암제 부작용이 많이 줄고 기력이 돌아오고 있습니다.", author:"id***do", tags:["항암","긍정"] },
+];
+
+/* ── 태그 분류 매핑 ─────────────── */
+const TAG_MAP = {
+  "항암":    ["항암","암","항암치료","암치료","부작용","구토","입맛","항암제"],
+  "당뇨":    ["당뇨","혈당","혈당수치","혈당관리","당뇨전단계","식후혈당","인슐린"],
+  "고혈압":  ["고혈압","혈압","혈압약","두통","어지러움"],
+  "고지혈증":["고지혈증","콜레스테롤","중성지방"],
+  "통증":    ["통증","신경통","무릎","관절통","아픔"],
+  "시력":    ["시력","눈","눈피로","침침","루테인","황반"],
+  "소화":    ["소화","위장","속","변비","장"],
+  "콜라겐":  ["콜라겐","피부","탄력","주름","촉촉","손톱"],
+  "안티에이징":["안티에이징","다이아몬드","노화"],
+  "비염":    ["비염","코막힘","코","알레르기","재채기"],
+  "관절":    ["관절","무릎","뻑뻑","연골"],
+  "피로":    ["피로","기력","체력","에너지"],
+};
+
+/* ── 검색용 인덱스 미리 계산 (속도 최적화) ── */
+const SYNONYMS_FLAT = Object.values(TAG_MAP).flat(); // highlightText용 캐시
+// 각 리뷰의 검색 텍스트를 미리 소문자로 변환해 저장
+REVIEWS.forEach(r => {
+  r._searchText = (r.text + " " + r.tags.join(" ")).toLowerCase();
+});
+// TAG_MAP 키+동의어를 소문자 단일 배열로 미리 펼치기
+const TAG_SEARCH_LIST = Object.entries(TAG_MAP).map(([key, synonyms]) => ({
+  key: key.toLowerCase(),
+  synonyms: synonyms.map(s => s.toLowerCase()),
+  all: [key.toLowerCase(), ...synonyms.map(s => s.toLowerCase())]
+}));
+
+/* ── STATE ──────────────────────── */
+let filteredReviews = [...REVIEWS];
+let currentPage    = 1;
+const PER_PAGE     = 10;
+let activeProduct  = "all";
+let activeRating   = "all";
+let searchQuery    = "";
+let sortOrder      = "recent";
+
+/* ── DOM REFS ───────────────────── */
+const searchInput  = document.getElementById("searchInput");
+const clearBtn     = document.getElementById("clearBtn");
+const reviewList   = document.getElementById("reviewList");
+const loadMoreBtn  = document.getElementById("loadMoreBtn");
+const loadMoreWrap = document.getElementById("loadMoreWrap");
+const countText    = document.getElementById("countText");
+
+/* ── HELPERS ────────────────────── */
+function starsHTML(n) {
+  return "★".repeat(n) + "☆".repeat(5-n);
+}
+function matchesSearch(review, query) {
+  if (!query) return true;
+  const q = query.toLowerCase();
+  // 1. 리뷰 텍스트+태그에서 직접 검색 (미리 소문자 변환된 _searchText 사용)
+  if (review._searchText.includes(q)) return true;
+  // 2. TAG_MAP 동의어 검색 (미리 계산된 TAG_SEARCH_LIST 사용)
+  for (const entry of TAG_SEARCH_LIST) {
+    if (entry.all.some(term => term.includes(q) || q.includes(term))) {
+      if (review._searchText.split(/[\s,.]+/).some(w => entry.all.some(s => w.includes(s)))) return true;
+    }
+  }
+  return false;
+}
+function matchesProduct(review, product) {
+  if (product === "all") return true;
+  return review.tags.includes(product) ||
+         review.text.includes(product) ||
+         (product === "캐비초크" && (review.tags.includes("당뇨") || review.tags.includes("항암") || review.tags.includes("소화"))) ||
+         (product === "콜라겐"   && (review.tags.includes("콜라겐") || review.tags.includes("피로"))) ||
+         (product === "다이아몬드 펄" && (review.tags.includes("안티에이징"))) ||
+         (product === "안티에이징" && (review.tags.includes("안티에이징") || review.tags.includes("콜라겐")));
+}
+function highlightText(text, query) {
+  if (!query) return text;
+  // SYNONYMS_FLAT은 이미 캐싱됨 — 매번 재계산 없음
+  const allTerms = [query, ...SYNONYMS_FLAT.filter(s => s.includes(query) || query.includes(s))];
+  let result = text;
+  allTerms.forEach(term => {
+    if (term.length < 2) return;
+    const re = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+    result = result.replace(re, '<span class="highlight">$1</span>');
+  });
+  return result;
+}
+function badgeHTML(tags) {
+  if (tags.includes("항암"))    return '<span class="review-badge badge-cancer">항암</span>';
+  if (tags.includes("당뇨"))    return '<span class="review-badge badge-diabetes">당뇨</span>';
+  if (tags.includes("콜라겐") || tags.includes("안티에이징")) return '<span class="review-badge badge-collagen">콜라겐</span>';
+  if (tags.includes("긍정"))    return '<span class="review-badge badge-positive">긍정</span>';
+  return '<span class="review-badge badge-neutral">보통</span>';
+}
+
+/* ── FILTER & RENDER ────────────── */
+function applyFilters() {
+  filteredReviews = REVIEWS.filter(r => {
+    return matchesProduct(r, activeProduct) &&
+           (activeRating === "all" || r.rating === parseInt(activeRating)) &&
+           matchesSearch(r, searchQuery);
+  });
+  if (sortOrder === "rating") {
+    filteredReviews.sort((a,b) => b.rating - a.rating || b.id - a.id);
+  } else {
+    filteredReviews.sort((a,b) => b.id - a.id);
+  }
+  currentPage = 1;
+  renderReviews(false);
+  updateCount();
+}
+
+function renderReviews(append) {
+  const start = 0;
+  const end   = currentPage * PER_PAGE;
+  const slice = filteredReviews.slice(start, end);
+
+  if (!append) reviewList.innerHTML = "";
+
+  if (filteredReviews.length === 0) {
+    reviewList.innerHTML = `
+      <div class="no-results">
+        <div class="no-results-icon">🔍</div>
+        <div class="no-results-text">검색 결과가 없습니다</div>
+        <div class="no-results-sub">다른 키워드로 검색해 보세요 (예: 항암, 당뇨, 혈압)</div>
+      </div>`;
+    loadMoreWrap.style.display = "none";
+    return;
+  }
+
+  // Render from last rendered position
+  const from = append ? (currentPage - 1) * PER_PAGE : 0;
+  const to   = currentPage * PER_PAGE;
+  const newSlice = filteredReviews.slice(from, to);
+
+  newSlice.forEach(r => {
+    const card = document.createElement("div");
+    card.className = "review-card";
+    card.innerHTML = `
+      <div class="review-top">
+        <div>
+          <div class="stars">${starsHTML(r.rating)}</div>
+          <div class="review-meta" style="margin-top:6px">
+            ${badgeHTML(r.tags)}
+          </div>
+        </div>
+        <div class="review-date">${r.date}</div>
+      </div>
+      <div class="review-body">${highlightText(r.text, searchQuery)}</div>
+      <div class="review-author">
+        <span class="author-dot"></span>
+        ${r.author}
+      </div>`;
+    reviewList.appendChild(card);
+  });
+
+  // Load more button
+  if (to >= filteredReviews.length) {
+    loadMoreWrap.style.display = "none";
+  } else {
+    loadMoreWrap.style.display = "block";
+    loadMoreBtn.disabled = false;
+    loadMoreBtn.textContent = `더 보기 (${filteredReviews.length - to}개 남음)`;
+  }
+}
+
+function updateCount() {
+  const total = filteredReviews.length;
+  const base  = REVIEWS.length.toLocaleString();
+  if (searchQuery || activeRating !== "all" || activeProduct !== "all") {
+    countText.innerHTML = `<strong>${total.toLocaleString()}</strong>개 리뷰 (전체 ${base}개 중)`;
+  } else {
+    countText.innerHTML = `<strong>17,145</strong>개 리뷰`;
+  }
+}
+
+/* ── EVENTS ─────────────────────── */
+searchInput.addEventListener("input", () => {
+  searchQuery = searchInput.value.trim();
+  clearBtn.classList.toggle("visible", searchQuery.length > 0);
+  applyFilters();
+});
+
+clearBtn.addEventListener("click", () => {
+  searchInput.value = "";
+  searchQuery = "";
+  clearBtn.classList.remove("visible");
+  applyFilters();
+  searchInput.focus();
+});
+
+// Product tag clicks
+document.querySelectorAll(".product-tag").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".product-tag").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeProduct = btn.dataset.product;
+    applyFilters();
+  });
+});
+
+// Rating filter clicks
+document.querySelectorAll(".filter-btn[data-rating]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn[data-rating]").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeRating = btn.dataset.rating;
+    applyFilters();
+  });
+});
+
+// Sort
+document.getElementById("sortSelect").addEventListener("change", e => {
+  sortOrder = e.target.value;
+  applyFilters();
+});
+
+// Load more
+loadMoreBtn.addEventListener("click", () => {
+  loadMoreBtn.innerHTML = '<span class="spinner"></span>로딩 중...';
+  loadMoreBtn.disabled = true;
+  setTimeout(() => {
+    currentPage++;
+    renderReviews(true);
+    updateCount();
+  }, 400);
+});
+
+/* ── LOAD FULL DATA FROM reviews.html ── */
+async function loadFullReviews() {
+  try {
+    // 로딩 상태 표시
+    reviewList.innerHTML = `
+      <div style="text-align:center;padding:60px 20px;color:var(--text-light)">
+        <div class="spinner" style="border-color:rgba(26,92,58,0.2);border-top-color:var(--green-deep);margin:0 auto 12px;display:block;"></div>
+        <div style="font-size:14px">전체 리뷰 데이터 로딩 중...</div>
+      </div>`;
+
+    const res = await fetch('reviews.html');
+    if (!res.ok) throw new Error('reviews.html 로드 실패');
+    const html = await res.text();
+
+    // reviews.html 안의 REVIEWS 배열 추출 (변수명 자동 탐지)
+    let match = html.match(/const REVIEWS\s*=\s*(\[[\s\S]*?\]);/) ||
+                html.match(/var REVIEWS\s*=\s*(\[[\s\S]*?\]);/) ||
+                html.match(/let REVIEWS\s*=\s*(\[[\s\S]*?\]);/) ||
+                html.match(/const reviews\s*=\s*(\[[\s\S]*?\]);/) ||
+                html.match(/var reviews\s*=\s*(\[[\s\S]*?\]);/);
+    if (!match) throw new Error('REVIEWS 데이터를 찾을 수 없습니다');
+
+    const fullData = JSON.parse(match[1]);
+
+    // 검색용 인덱스 미리 계산
+    fullData.forEach(r => {
+      if (!r._searchText) {
+        r._searchText = (r.text + " " + (r.tags || []).join(" ")).toLowerCase();
+      }
+    });
+
+    // 전체 데이터로 교체
+    REVIEWS.length = 0;
+    fullData.forEach(r => REVIEWS.push(r));
+
+    // 카운트 업데이트
+    countText.innerHTML = `<strong>${REVIEWS.length.toLocaleString()}</strong>개 리뷰`;
+
+    // 헤더 통계도 업데이트
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers[0]) statNumbers[0].textContent = REVIEWS.length.toLocaleString();
+
+    applyFilters();
+
+  } catch (e) {
+    // reviews.html 로드 실패 시 샘플 30개로 폴백
+    console.warn('전체 데이터 로드 실패, 샘플 데이터로 표시합니다:', e.message);
+    // 상단에 안내 배너 표시
+    const banner = document.createElement('div');
+    banner.style.cssText = 'max-width:720px;margin:0 auto;padding:0 16px 12px;';
+    banner.innerHTML = `
+      <div style="background:#fff3e0;border:1px solid #ffb74d;border-radius:8px;padding:10px 14px;
+                  font-size:12px;color:#e65100;display:flex;align-items:center;gap:8px;">
+        ⚠️ 전체 리뷰 로드 실패 — 샘플 30개만 표시됩니다.
+        reviews.html이 같은 폴더에 있는지 확인해 주세요.
+      </div>`;
+    reviewList.parentNode.insertBefore(banner, reviewList);
+    applyFilters();
+  }
+}
+
+/* ── INIT ────────────────────────── */
+loadFullReviews();
+</script>
+</body>
+</html>
