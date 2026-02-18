@@ -1,0 +1,63 @@
+<!-- PWA 메타태그 - index.html의 <head> 섹션에 추가하세요 -->
+
+<!-- Web App Manifest -->
+<link rel="manifest" href="/manifest.json">
+
+<!-- iOS 메타태그 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="캐비초크">
+<link rel="apple-touch-icon" href="/icon-192.png">
+
+<!-- 테마 컬러 -->
+<meta name="theme-color" content="#2d5016">
+<meta name="msapplication-TileColor" content="#2d5016">
+
+<!-- PWA 설치 버튼 스타일 -->
+<style>
+  #installButton {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #2d5016 0%, #4a7c2a 100%);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(45, 80, 22, 0.4);
+    z-index: 1000;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 4px 15px rgba(45, 80, 22, 0.4);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(45, 80, 22, 0.6);
+    }
+  }
+  
+  #installButton:hover {
+    background: linear-gradient(135deg, #1e3510 0%, #2d5016 100%);
+    transform: scale(1.05);
+  }
+  
+  #installButton:active {
+    transform: scale(0.95);
+  }
+</style>
+
+<!-- PWA 설치 버튼 - <body> 끝부분에 추가하세요 -->
+<button id="installButton">
+  📱 앱으로 추가하기
+</button>
+
+<!-- PWA 스크립트 - <body> 끝부분, 다른 스크립트 전에 추가하세요 -->
+<script src="/pwa-install.js"></script>
