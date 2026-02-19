@@ -1,43 +1,98 @@
-/* ── [기존 설정 유지] ── */
-let allReviews = []; // 여기에 데이터가 실시간으로 쌓입니다.
-let filteredReviews = [];
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VENUSTARS Reviews</title>
+    <style>
+        /* 질문자님이 좋아하셨던 깔끔한 초록색 디자인 */
+        :root { --main-color: #1a5c3a; --bg-color: #f9f7f4; }
+        body { font-family: sans-serif; background: var(--bg-color); margin: 0; padding: 0; }
+        header { background: var(--main-color); color: white; text-align: center; padding: 2rem 1rem; }
+        .search-box { position: sticky; top: 0; background: var(--bg-color); padding: 15px; text-align: center; z-index: 100; }
+        #searchInput { width: 90%; max-width: 500px; padding: 12px 20px; border: 2px solid var(--main-color); border-radius: 25px; font-size: 16px; }
+        #countText { font-size: 14px; color: var(--main-color); margin-top: 10px; font-weight: bold; }
+        #reviewList { padding: 15px; max-width: 600px; margin: 0 auto; }
+        .card { background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .card .date { font-size: 12px; color: #888; }
+        .card .content { margin-top: 10px; line-height: 1.5; color: #333; }
+        .highlight { background: yellow; font-weight: bold; }
+    </style>
+</head>
+<body>
 
-// 🚀 핵심: 화면을 먼저 띄우는 로드 방식
-async function loadFullReviews() {
-    const status = document.getElementById('countText');
-    const list = document.getElementById('reviewList');
+<header>
+    <h1>VENUSTARS Reviews</h1>
+    <p>실제 고객 17,145명의 사용 후기</p>
+</header>
 
-    try {
-        // 1. 첫 화면용 데이터(최신 30개)만 빛의 속도로 가져옵니다.
-        const firstQuery = query(collection(db, "reviews"), orderBy("리뷰등록일", "desc"), limit(30));
-        const firstSnapshot = await getDocs(firstQuery);
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="검색어를 입력하세요 (예: 항암, 당뇨)">
+    <div id="countText">데이터 연결 중...</div>
+</div>
+
+<div id="reviewList"></div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, limit, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    // 1. 파이어베이스 설정 (기존 키 그대로 사용)
+    const firebaseConfig = {
+        apiKey: "AIzaSyBpqZEXkf6vq5cwpdeLADGTz8A0M3NKLjU",
+        authDomain: "venustars.firebaseapp.com",
+        projectId: "venustars",
+        storageBucket: "venustars.firebasestorage.app",
+        messagingSenderId: "171419456473",
+        appId: "1:171419456473:web:d9b77b0608b5ef3201bfc8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    let allReviews = [];
+
+    // 2. 핵심 로직: 껍데기 먼저 띄우고 데이터 채우기
+    async function loadData() {
+        const countText = document.getElementById('countText');
         
-        allReviews = firstSnapshot.docs.map(doc => {
-            const data = doc.data();
-            data._searchText = (data['리뷰상세내용'] || '').toLowerCase();
-            return data;
-        });
+        try {
+            // [STEP A] 먼저 30개만 광속 로딩 (모바일에서도 1초 컷)
+            const firstQ = query(collection(db, "reviews"), limit(30));
+            const snap = await getDocs(firstQ);
+            allReviews = snap.docs.map(doc => doc.data());
+            render(allReviews); 
+            countText.innerText = "⚡ 일부 로드 완료 (전체 동기화 중...)";
 
-        // 2. 30개만 먼저 화면에 뿌립니다. (이때 사용자는 로딩이 끝났다고 느낍니다.)
-        filteredReviews = [...allReviews];
-        renderReviews(false);
-        updateCount();
-
-        // 3. 🛑 중요: 이제 사용자가 리뷰를 읽는 동안 나머지 17,000개를 몰래 가져옵니다.
-        const remainingQuery = collection(db, "reviews");
-        getDocs(remainingQuery).then(fullSnapshot => {
-            // 전체 데이터를 백그라운드에서 합칩니다.
-            const fullData = fullSnapshot.docs.map(doc => {
-                const data = doc.data();
-                data._searchText = (data['리뷰상세내용'] || '').toLowerCase();
-                return data;
+            // [STEP B] 사용자가 보고 있는 사이 나머지 1.7만 개 가져오기
+            getDocs(collection(db, "reviews")).then(fullSnap => {
+                allReviews = fullSnap.docs.map(doc => doc.data());
+                countText.innerText = `✅ 총 ${allReviews.length.toLocaleString()}개 리뷰 연결 완료!`;
             });
-            
-            allReviews = fullData; // 이제 금고의 모든 데이터가 메모리에 들어왔습니다.
-            updateCount(); // "17,145개 준비 완료"로 표시 변경
-        });
-
-    } catch (e) {
-        console.error("로딩 중 오류:", e);
+        } catch (e) {
+            countText.innerText = "❌ 데이터 연결 실패 (할당량 확인 필요)";
+        }
     }
-}
+
+    // 🎨 화면에 그리는 함수
+    function render(data) {
+        const list = document.getElementById('reviewList');
+        const term = document.getElementById('searchInput').value.toLowerCase();
+        list.innerHTML = data.map(r => `
+            <div class="card">
+                <div class="date">${r.리뷰등록일 || ''} | ⭐ ${r['구매자 평점'] || 5}</div>
+                <div class="content">${(r.리뷰상세내용 || '').replace(new RegExp(term, 'gi'), m => `<span class="highlight">${m}</span>`)}</div>
+            </div>
+        `).join('');
+    }
+
+    // 🔍 검색 이벤트
+    document.getElementById('searchInput').addEventListener('input', () => {
+        const term = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allReviews.filter(r => (r.리뷰상세내용 || '').toLowerCase().includes(term));
+        render(filtered.slice(0, 100)); // 검색 결과는 상위 100개만 먼저 보여줌
+    });
+
+    loadData();
+</script>
+</body>
+</html>
