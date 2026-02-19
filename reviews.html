@@ -68,6 +68,18 @@
             }
         }
         loadReviews();
+        // 마우스 우클릭 금지
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// 드래그 및 복사 금지
+document.addEventListener('selectstart', event => event.preventDefault());
+
+// 키보드 보안 (F12 개발자 도구 및 Ctrl+C 방지)
+document.onkeydown = function(e) {
+    if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 67)) {
+        return false;
+    }
+};
     </script>
 </body>
 </html>
