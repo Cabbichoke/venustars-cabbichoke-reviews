@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객 리뷰 - 베뉴스타</title>
+    <style>
+        body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; }
+        h1 { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        #reviews-container { margin-top: 30px; }
+        .review-card { border-bottom: 1px solid #eee; padding: 20px; margin-bottom: 15px; position: relative; }
+        .rating { color: #f39c12; font-weight: bold; font-size: 1.1em; }
+        .date { color: #888; font-size: 0.85em; position: absolute; top: 20px; right: 20px; }
+        .author { color: #666; margin-top: 10px; font-size: 0.9em; background: #f9f9f9; padding: 5px 10px; display: inline-block; border-radius: 4px; }
+        .content { margin: 15px 0; font-size: 1em; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+
+    <h1>고객 리뷰</h1>
+
+    <div id="reviews-container">
+        <p style="text-align:center;">리뷰 데이터를 불러오는 중입니다...</p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // 사용자님의 Firebase 설정값
+        const firebaseConfig = {
+            apiKey: "AIzaSyBpqZEXkf6vq5cwpdeLADGTz8A0M3NKLjU",
+            authDomain: "venustars.firebaseapp.com",
+            projectId: "venustars",
+            storageBucket: "venustars.firebasestorage.app",
+            messagingSenderId: "171419456473",
+            appId: "1:171419456473:web:d9b77b0608b5ef3201bfc8",
+            measurementId: "G-CR2B0YR8ZJ"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadReviews() {
+            const container = document.getElementById('reviews-container');
+            
+            try {
+                // 'reviews' 컬렉션 연결
+                const q = query(collection(db, "reviews")); 
+                const querySnapshot = await getDocs(q);
+                
+                container.innerHTML = ''; 
+
+                if (querySnapshot.empty) {
+                    container.innerHTML = '<p style="text-align:center;">등록된 리뷰가 없습니다.</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    
+                    // 한글 필드명 대응
+                    const rating = data['구매자 평점'] || data['rating'] || 5;
+                    const content = data['리뷰상세내용'] || data['reviews'] || '';
+                    const author = data['등록자'] || data['id'] || '익명';
+                    const date = data['리뷰등록일'] || data['date'] || '';
+
+                    const html = `
+                        <div class="review-card">
+                            <span class="date">${date}</span>
+                            <div class="rating">⭐⭐⭐⭐⭐ ${rating}점</div>
+                            <p class="content">${content}</p>
+                            <div class="author">작성자: ${author}</div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+            } catch (error) {
+                console.error("Error:", error);
+                container.innerHTML = "<p>데이터를 불러오는 중 오류가 발생했습니다.</p>";
+            }
+        }
+
+        loadReviews();
+    </script>
+</body>
+</html>
