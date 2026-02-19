@@ -2,32 +2,27 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>고객 리뷰 - 베뉴스타</title>
+    <title>VENUSTARS Reviews</title>
     <style>
-        body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; }
-        h1 { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; }
-        #reviews-container { margin-top: 30px; }
-        .review-card { border-bottom: 1px solid #eee; padding: 20px; margin-bottom: 15px; position: relative; }
-        .rating { color: #f39c12; font-weight: bold; font-size: 1.1em; }
-        .date { color: #888; font-size: 0.85em; position: absolute; top: 20px; right: 20px; }
-        .author { color: #666; margin-top: 10px; font-size: 0.9em; background: #f9f9f9; padding: 5px 10px; display: inline-block; border-radius: 4px; }
-        .content { margin: 15px 0; font-size: 1em; white-space: pre-wrap; }
+        body { font-family: sans-serif; background-color: #f4f7f4; margin: 0; padding: 20px; }
+        .review-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .rating { color: #f39c12; font-size: 1.1em; }
+        .date { color: #aaa; font-size: 0.85em; position: absolute; top: 20px; right: 20px; }
+        .content { margin: 15px 0; color: #333; line-height: 1.5; }
+        .author { color: #777; font-size: 0.9em; }
+        .tag { background: #fee; color: #f66; padding: 2px 8px; border-radius: 10px; font-size: 0.8em; margin-bottom: 5px; display: inline-block; }
     </style>
 </head>
 <body>
 
-    <h1>고객 리뷰</h1>
-
     <div id="reviews-container">
-        <p style="text-align:center;">리뷰 데이터를 불러오는 중입니다...</p>
+        <p style="text-align:center;">실시간 리뷰를 불러오는 중입니다...</p>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // 사용자님의 Firebase 설정값
         const firebaseConfig = {
             apiKey: "AIzaSyBpqZEXkf6vq5cwpdeLADGTz8A0M3NKLjU",
             authDomain: "venustars.firebaseapp.com",
@@ -43,44 +38,35 @@
 
         async function loadReviews() {
             const container = document.getElementById('reviews-container');
-            
             try {
-                // 'reviews' 컬렉션 연결
-                const q = query(collection(db, "reviews")); 
-                const querySnapshot = await getDocs(q);
-                
+                // 파이어베이스 'reviews' 컬렉션 호출
+                const querySnapshot = await getDocs(collection(db, "reviews"));
                 container.innerHTML = ''; 
-
-                if (querySnapshot.empty) {
-                    container.innerHTML = '<p style="text-align:center;">등록된 리뷰가 없습니다.</p>';
-                    return;
-                }
 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-                    
-                    // 한글 필드명 대응
-                    const rating = data['구매자 평점'] || data['rating'] || 5;
+                    // 파이어베이스 필드명과 매칭
+                    const ratingNum = data['구매자 평점'] || data['rating'] || 5;
+                    const stars = "⭐".repeat(parseInt(ratingNum));
                     const content = data['리뷰상세내용'] || data['reviews'] || '';
-                    const author = data['등록자'] || data['id'] || '익명';
+                    const author = data['등록자'] || data['id'] || '';
                     const date = data['리뷰등록일'] || data['date'] || '';
 
                     const html = `
                         <div class="review-card">
-                            <span class="date">${date}</span>
-                            <div class="rating">⭐⭐⭐⭐⭐ ${rating}점</div>
+                            <div class="tag">공식 인증</div>
+                            <div class="date">${date}</div>
+                            <div class="rating">${stars}</div>
                             <p class="content">${content}</p>
-                            <div class="author">작성자: ${author}</div>
+                            <div class="author">● ${author}</div>
                         </div>
                     `;
                     container.insertAdjacentHTML('beforeend', html);
                 });
-            } catch (error) {
-                console.error("Error:", error);
-                container.innerHTML = "<p>데이터를 불러오는 중 오류가 발생했습니다.</p>";
+            } catch (e) {
+                container.innerHTML = "데이터 로드 실패: " + e.message;
             }
         }
-
         loadReviews();
     </script>
 </body>
