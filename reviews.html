@@ -2,61 +2,56 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>VENUSTARS Reviews</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VENUSTARS - 공식 고객 리뷰</title>
     <style>
-        body { font-family: sans-serif; background-color: #f4f7f4; margin: 0; padding: 20px; }
+        body { font-family: 'Pretendard', sans-serif; background-color: #f4f7f4; margin: 0; padding: 20px; line-height: 1.6; }
         
-        /* 리뷰 카드 설정 */
+        /* 검색창 영역 */
+        .search-container { max-width: 800px; margin: 0 auto 30px; text-align: center; }
+        #search-input { width: 80%; padding: 12px 20px; border-radius: 25px; border: 1px solid #ddd; font-size: 16px; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+        /* 리뷰 카드 디자인 */
         .review-card { 
-            background: white; 
-            border-radius: 12px; 
-            padding: 20px; 
-            margin-bottom: 15px; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-            position: relative; 
-            max-width: 800px; 
-            margin-left: auto; 
-            margin-right: auto;
-            overflow: hidden; /* 워터마크가 카드를 빠져나가지 않게 함 */
+            background: white; border-radius: 12px; padding: 25px; margin-bottom: 20px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03); position: relative; max-width: 800px; 
+            margin-left: auto; margin-right: auto; overflow: hidden; 
         }
 
-        /* 🔒 희미한 Venustars 워터마크 추가 */
+        /* 🔒 보안: 희미한 Venustars 워터마크 */
         .review-card::before {
             content: "Venustars";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg); /* 살짝 기울임 */
-            font-size: 5rem;
-            font-weight: bold;
-            color: rgba(0, 0, 0, 0.03); /* 3% 투명도로 아주 희미하게 설정 */
-            white-space: nowrap;
-            pointer-events: none; /* 마우스 클릭 방해 금지 */
-            z-index: 0;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 5.5rem; font-weight: 900;
+            color: rgba(0, 0, 0, 0.025); /* 소비자 눈엔 거의 안 띄는 2.5% 투명도 */
+            white-space: nowrap; pointer-events: none; z-index: 0;
         }
 
-        /* 카드 내 콘텐츠가 워터마크보다 위에 보이게 설정 */
-        .tag, .date, .rating, .content, .author {
-            position: relative;
-            z-index: 1;
-        }
-
-        .rating { color: #f39c12; font-size: 1.1em; }
-        .date { color: #aaa; font-size: 0.85em; position: absolute; top: 20px; right: 20px; }
-        .content { margin: 15px 0; color: #333; line-height: 1.5; }
-        .author { color: #777; font-size: 0.9em; }
-        .tag { background: #fee; color: #f66; padding: 2px 8px; border-radius: 10px; font-size: 0.8em; margin-bottom: 5px; display: inline-block; }
+        /* 콘텐츠 레이어 (워터마크보다 위로) */
+        .card-inner { position: relative; z-index: 1; }
+        .tag { background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 6px; font-size: 0.75em; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+        .date { color: #aaa; font-size: 0.85em; position: absolute; top: 0; right: 0; }
+        .rating { color: #f39c12; font-size: 1.2em; margin-bottom: 10px; }
+        .content { color: #333; font-size: 1.05em; margin: 15px 0; word-break: break-all; }
+        .author { color: #888; font-size: 0.9em; border-top: 1px solid #eee; pt: 10px; margin-top: 10px; padding-top: 10px; }
+        
+        #status-msg { text-align: center; color: #666; margin-top: 20px; }
     </style>
 </head>
 <body>
 
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="리뷰 키워드를 검색하세요 (예: 항암, 효과, 배송)" onkeyup="filterReviews()">
+    </div>
+
     <div id="reviews-container">
-        <p style="text-align:center;">실시간 리뷰를 불러오는 중입니다...</p>
+        <p id="status-msg">실시간 리뷰 17,145개를 불러오는 중입니다...</p>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBpqZEXkf6vq5cwpdeLADGTz8A0M3NKLjU",
@@ -70,52 +65,73 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        let allReviews = []; // 데이터를 담아둘 배열
 
         async function loadReviews() {
             const container = document.getElementById('reviews-container');
             try {
                 const querySnapshot = await getDocs(collection(db, "reviews"));
-                container.innerHTML = ''; 
-
+                allReviews = [];
+                
                 querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const ratingNum = data['구매자 평점'] || data['rating'] || 5;
-                    const stars = "⭐".repeat(parseInt(ratingNum));
-                    const content = data['리뷰상세내용'] || data['reviews'] || '';
-                    const author = data['등록자'] || data['id'] || '';
-                    const date = data['리뷰등록일'] || data['date'] || '';
-
-                    const html = `
-                        <div class="review-card">
-                            <div class="tag">공식 인증</div>
-                            <div class="date">${date}</div>
-                            <div class="rating">${stars}</div>
-                            <p class="content">${content}</p>
-                            <div class="author">● ${author}</div>
-                        </div>
-                    `;
-                    container.insertAdjacentHTML('beforeend', html);
+                    allReviews.push(doc.data());
                 });
+
+                renderReviews(allReviews); // 처음에는 전체 표시
             } catch (e) {
                 container.innerHTML = "데이터 로드 실패: " + e.message;
             }
         }
+
+        // 리뷰를 화면에 그리는 함수
+        window.renderReviews = function(dataList) {
+            const container = document.getElementById('reviews-container');
+            container.innerHTML = '';
+
+            if (dataList.length === 0) {
+                container.innerHTML = '<p id="status-msg">검색 결과가 없습니다.</p>';
+                return;
+            }
+
+            dataList.forEach(data => {
+                const ratingNum = data['구매자 평점'] || data['rating'] || 5;
+                const stars = "⭐".repeat(parseInt(ratingNum));
+                const content = data['리뷰상세내용'] || data['reviews'] || '';
+                const author = data['등록자'] || data['id'] || '익명';
+                const date = data['리뷰등록일'] || data['date'] || '';
+
+                const html = `
+                    <div class="review-card">
+                        <div class="card-inner">
+                            <div class="tag">공식몰 인증후기</div>
+                            <div class="date">${date}</div>
+                            <div class="rating">${stars}</div>
+                            <p class="content">${content}</p>
+                            <div class="author">작성자: ${author}</div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        };
+
+        // 검색 필터링 함수
+        window.filterReviews = function() {
+            const term = document.getElementById('search-input').value.toLowerCase();
+            const filtered = allReviews.filter(r => 
+                (r['리뷰상세내용'] && r['리뷰상세내용'].toLowerCase().includes(term)) ||
+                (r['reviews'] && r['reviews'].toLowerCase().includes(term))
+            );
+            renderReviews(filtered);
+        };
+
         loadReviews();
 
-        // 🔒 마우스 우클릭 금지
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
-        // 🔒 드래그 및 복사 금지
-        document.addEventListener('selectstart', event => event.preventDefault());
-
-        // 🔒 키보드 보안 (F12, Ctrl+C, Ctrl+S 방지)
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123 || 
-                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
-                (e.ctrlKey && e.keyCode == 67) ||
-                (e.ctrlKey && e.keyCode == 83)) {
-                return false;
-            }
+        // 🔒 강력 보안 설정
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+        document.onkeydown = e => {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 67) || (e.ctrlKey && e.keyCode == 83)) return false;
         };
     </script>
 </body>
