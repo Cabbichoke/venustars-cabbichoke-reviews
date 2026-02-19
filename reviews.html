@@ -31,7 +31,7 @@
         .author { color: #888; font-size: 0.9em; border-top: 1px solid #eee; padding-top: 10px; }
         
         #status-msg { text-align: center; color: #2e7d32; font-weight: bold; margin-bottom: 20px; }
-        .highlight { background-color: yellow; font-weight: bold; }
+        .highlight { background-color: yellow; font-weight: bold; color: black; }
     </style>
 </head>
 <body>
@@ -53,84 +53,4 @@
             projectId: "venustars",
             storageBucket: "venustars.firebasestorage.app",
             messagingSenderId: "171419456473",
-            appId: "1:171419456473:web:d9b77b0608b5ef3201bfc8"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        let allReviews = [];
-
-        async function loadReviews() {
-            const status = document.getElementById('status-msg');
-            try {
-                const querySnapshot = await getDocs(collection(db, "reviews"));
-                allReviews = querySnapshot.docs.map(doc => doc.data());
-                
-                status.innerText = `총 ${allReviews.length.toLocaleString()}개의 공식 리뷰가 로드되었습니다.`;
-                // 처음에는 최신순으로 상위 30개만 보여주기 (속도 최적화)
-                renderReviews(allReviews.slice(0, 30)); 
-            } catch (e) {
-                status.innerText = "데이터 로드 오류: " + e.message;
-            }
-        }
-
-        window.renderReviews = function(dataList, searchTerm = "") {
-            const container = document.getElementById('reviews-container');
-            container.innerHTML = '';
-
-            if (dataList.length === 0) {
-                container.innerHTML = '<p style="text-align:center;">검색 결과가 없습니다.</p>';
-                return;
-            }
-
-            dataList.forEach(data => {
-                let content = data['리뷰상세내용'] || data['reviews'] || '';
-                const author = data['등록자'] || data['id'] || '익명';
-                const date = data['리뷰등록일'] || data['date'] || '';
-                const rating = "⭐".repeat(parseInt(data['구매자 평점'] || 5));
-
-                // 검색어 강조 표시
-                if (searchTerm) {
-                    const regex = new RegExp(`(${searchTerm})`, "gi");
-                    content = content.replace(regex, `<span class="highlight">$1</span>`);
-                }
-
-                const html = `
-                    <div class="review-card">
-                        <div class="card-inner">
-                            <span class="tag">공식 인증 후기</span>
-                            <span class="date">${date}</span>
-                            <div class="rating">${rating}</div>
-                            <p class="content">${content}</p>
-                            <div class="author">작성자: ${author.substring(0, 3)}***</div>
-                        </div>
-                    </div>
-                `;
-                container.insertAdjacentHTML('beforeend', html);
-            });
-        };
-
-        window.filterReviews = function() {
-            const term = document.getElementById('search-input').value.trim().toLowerCase();
-            if (!term) {
-                renderReviews(allReviews.slice(0, 30)); // 검색어 없으면 다시 상위 30개
-                return;
-            }
-            
-            // 1,200개 항암 키워드 검색 로직
-            const filtered = allReviews.filter(r => {
-                const text = (r['리뷰상세내용'] || r['reviews'] || '').toLowerCase();
-                return text.includes(term);
-            });
-            
-            renderReviews(filtered, term);
-        };
-
-        loadReviews();
-
-        // 🔒 보안 설정
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('selectstart', e => e.preventDefault());
-    </script>
-</body>
-</html>
+            appId: "1:1714194564
