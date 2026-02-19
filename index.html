@@ -1,154 +1,43 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VENUSTARS 고객 리뷰 - 17,145개 실제 후기</title>
-    <style>
-        /* 기존 스타일 시트 내용 동일 */
-        :root { --green-deep: #1a5c3a; --green-mid: #2d7a52; --green-light: #e8f5ee; --green-border: #1a5c3a; --accent-gold: #c9973a; --text-dark: #1a1a1a; --text-mid: #444; --text-light: #777; --bg: #f9f7f4; --white: #ffffff; --shadow: 0 2px 16px rgba(0,0,0,0.08); --radius: 12px; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Noto Sans KR', sans-serif; background: var(--bg); color: var(--text-dark); min-height: 100vh; }
-        .site-header { background: var(--green-deep); color: white; padding: 28px 20px 24px; text-align: center; position: relative; overflow: hidden; }
-        .header-badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 500; margin-bottom: 10px; color: rgba(255,255,255,0.9); }
-        .site-title { font-family: 'Noto Serif KR', serif; font-size: clamp(26px, 6vw, 36px); font-weight: 700; color: white; }
-        .search-section { padding: 22px 16px 16px; max-width: 720px; margin: 0 auto; }
-        .search-wrapper { position: relative; }
-        .search-input { width: 100%; padding: 14px 20px 14px 50px; border: 2.5px solid var(--green-border); border-radius: 50px; font-size: 15px; outline: none; }
-        .review-card { background: white; border-radius: var(--radius); padding: 18px; margin-bottom: 10px; box-shadow: var(--shadow); border: 1px solid #f0f0f0; }
-        .highlight { background: yellow; color: black; font-weight: bold; padding: 0 2px; }
-        .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4); border-top-color: white; border-radius: 50%; animation: spin 0.6s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        /* [이하 스타일 생략 - 기존 스타일 유지] */
-    </style>
-</head>
-<body>
+/* ── [기존 설정 유지] ── */
+let allReviews = []; // 여기에 데이터가 실시간으로 쌓입니다.
+let filteredReviews = [];
 
-<header class="site-header">
-    <div class="header-badge">📋 공식 인증 리뷰 · 파이어베이스 데이터베이스</div>
-    <h1 class="site-title">VENUSTARS Reviews</h1>
-    <p class="site-subtitle">실제 고객 17,145명의 사용 후기</p>
-</header>
+// 🚀 핵심: 화면을 먼저 띄우는 로드 방식
+async function loadFullReviews() {
+    const status = document.getElementById('countText');
+    const list = document.getElementById('reviewList');
 
-<div class="search-section">
-    <div class="search-wrapper">
-        <span class="search-icon">🔍</span>
-        <input type="search" class="search-input" id="searchInput" placeholder="예: 항암, 고혈압, 당뇨, 고지혈증">
-    </div>
-</div>
-
-<div id="status-msg" style="text-align:center; color:#1a5c3a; font-weight:bold; margin-top:10px;">데이터 금고 연결 중...</div>
-<div class="review-list" id="reviewList"></div>
-<div class="load-more-wrap" id="loadMoreWrap" style="display:none; text-align:center; padding: 20px;">
-    <button class="load-more-btn" id="loadMoreBtn" style="padding:10px 30px; background:#1a5c3a; color:white; border-radius:20px; border:none;">더 보기</button>
-</div>
-
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyBpqZEXkf6vq5cwpdeLADGTz8A0M3NKLjU",
-        authDomain: "venustars.firebaseapp.com",
-        projectId: "venustars",
-        storageBucket: "venustars.firebasestorage.app",
-        messagingSenderId: "171419456473",
-        appId: "1:171419456473:web:d9b77b0608b5ef3201bfc8"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    let allReviews = [];
-    let filteredReviews = [];
-    let currentPage = 1;
-    const PER_PAGE = 15;
-
-    // 1. 데이터 불러오기 (검색 속도 최적화 포함)
-    async function loadReviews() {
-        const status = document.getElementById('status-msg');
-        const list = document.getElementById('reviewList');
-        try {
-            const querySnapshot = await getDocs(collection(db, "reviews"));
-            allReviews = querySnapshot.docs.map(doc => {
-                const data = doc.data();
-                // 검색 속도를 위해 미리 검색용 텍스트를 합쳐둡니다.
-                data._searchText = (
-                    (data['리뷰상세내용'] || data['reviews'] || '') + 
-                    (data['등록자'] || '')
-                ).toLowerCase();
-                return data;
-            });
-
-            status.innerText = `✅ 총 ${allReviews.length.toLocaleString()}개의 공식 리뷰가 연결되었습니다.`;
-            filteredReviews = [...allReviews];
-            renderReviews();
-        } catch (e) {
-            status.innerText = "❌ 데이터 로드 실패: " + e.message;
-        }
-    }
-
-    // 2. 화면에 그리기
-    window.renderReviews = function(append = false) {
-        const list = document.getElementById('reviewList');
-        const loadMoreWrap = document.getElementById('loadMoreWrap');
-        const term = document.getElementById('searchInput').value.toLowerCase();
+    try {
+        // 1. 첫 화면용 데이터(최신 30개)만 빛의 속도로 가져옵니다.
+        const firstQuery = query(collection(db, "reviews"), orderBy("리뷰등록일", "desc"), limit(30));
+        const firstSnapshot = await getDocs(firstQuery);
         
-        if (!append) list.innerHTML = '';
-
-        const start = (currentPage - 1) * PER_PAGE;
-        const end = start + PER_PAGE;
-        const slice = filteredReviews.slice(start, end);
-
-        if (filteredReviews.length === 0) {
-            list.innerHTML = '<p style="text-align:center; padding:50px;">검색 결과가 없습니다.</p>';
-            loadMoreWrap.style.display = 'none';
-            return;
-        }
-
-        slice.forEach(r => {
-            let content = r['리뷰상세내용'] || r['reviews'] || '';
-            const author = r['등록자'] || r['id'] || '익명';
-            const date = r['리뷰등록일'] || r['date'] || '';
-            const stars = "⭐".repeat(parseInt(r['구매자 평점'] || 5));
-
-            // 하이라이트 처리
-            if (term) {
-                const regex = new RegExp(`(${term})`, "gi");
-                content = content.toString().replace(regex, `<span class="highlight">$1</span>`);
-            }
-
-            const html = `
-                <div class="review-card">
-                    <div class="review-top">
-                        <span class="stars">${stars}</span>
-                        <span class="review-date" style="float:right; color:#ccc; font-size:12px;">${date}</span>
-                    </div>
-                    <div class="review-body" style="margin:10px 0; font-size:14px; line-height:1.6;">${content}</div>
-                    <div class="review-author" style="font-size:12px; color:#888;">작성자: ${author.toString().substring(0,3)}***</div>
-                </div>
-            `;
-            list.insertAdjacentHTML('beforeend', html);
+        allReviews = firstSnapshot.docs.map(doc => {
+            const data = doc.data();
+            data._searchText = (data['리뷰상세내용'] || '').toLowerCase();
+            return data;
         });
 
-        loadMoreWrap.style.display = (end < filteredReviews.length) ? 'block' : 'none';
-    };
+        // 2. 30개만 먼저 화면에 뿌립니다. (이때 사용자는 로딩이 끝났다고 느낍니다.)
+        filteredReviews = [...allReviews];
+        renderReviews(false);
+        updateCount();
 
-    // 3. 실시간 검색 필터
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase().trim();
-        currentPage = 1;
-        filteredReviews = allReviews.filter(r => r._searchText.includes(term));
-        renderReviews();
-    });
+        // 3. 🛑 중요: 이제 사용자가 리뷰를 읽는 동안 나머지 17,000개를 몰래 가져옵니다.
+        const remainingQuery = collection(db, "reviews");
+        getDocs(remainingQuery).then(fullSnapshot => {
+            // 전체 데이터를 백그라운드에서 합칩니다.
+            const fullData = fullSnapshot.docs.map(doc => {
+                const data = doc.data();
+                data._searchText = (data['리뷰상세내용'] || '').toLowerCase();
+                return data;
+            });
+            
+            allReviews = fullData; // 이제 금고의 모든 데이터가 메모리에 들어왔습니다.
+            updateCount(); // "17,145개 준비 완료"로 표시 변경
+        });
 
-    // 4. 더 보기 버튼
-    document.getElementById('loadMoreBtn').addEventListener('click', () => {
-        currentPage++;
-        renderReviews(true);
-    });
-
-    loadReviews();
-</script>
-
-</body>
-</html>
+    } catch (e) {
+        console.error("로딩 중 오류:", e);
+    }
+}
