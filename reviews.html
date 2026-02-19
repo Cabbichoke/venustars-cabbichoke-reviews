@@ -5,7 +5,42 @@
     <title>VENUSTARS Reviews</title>
     <style>
         body { font-family: sans-serif; background-color: #f4f7f4; margin: 0; padding: 20px; }
-        .review-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; max-width: 800px; margin-left: auto; margin-right: auto; }
+        
+        /* 리뷰 카드 설정 */
+        .review-card { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            position: relative; 
+            max-width: 800px; 
+            margin-left: auto; 
+            margin-right: auto;
+            overflow: hidden; /* 워터마크가 카드를 빠져나가지 않게 함 */
+        }
+
+        /* 🔒 희미한 Venustars 워터마크 추가 */
+        .review-card::before {
+            content: "Venustars";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg); /* 살짝 기울임 */
+            font-size: 5rem;
+            font-weight: bold;
+            color: rgba(0, 0, 0, 0.03); /* 3% 투명도로 아주 희미하게 설정 */
+            white-space: nowrap;
+            pointer-events: none; /* 마우스 클릭 방해 금지 */
+            z-index: 0;
+        }
+
+        /* 카드 내 콘텐츠가 워터마크보다 위에 보이게 설정 */
+        .tag, .date, .rating, .content, .author {
+            position: relative;
+            z-index: 1;
+        }
+
         .rating { color: #f39c12; font-size: 1.1em; }
         .date { color: #aaa; font-size: 0.85em; position: absolute; top: 20px; right: 20px; }
         .content { margin: 15px 0; color: #333; line-height: 1.5; }
@@ -39,13 +74,11 @@
         async function loadReviews() {
             const container = document.getElementById('reviews-container');
             try {
-                // 파이어베이스 'reviews' 컬렉션 호출
                 const querySnapshot = await getDocs(collection(db, "reviews"));
                 container.innerHTML = ''; 
 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-                    // 파이어베이스 필드명과 매칭
                     const ratingNum = data['구매자 평점'] || data['rating'] || 5;
                     const stars = "⭐".repeat(parseInt(ratingNum));
                     const content = data['리뷰상세내용'] || data['reviews'] || '';
@@ -68,18 +101,22 @@
             }
         }
         loadReviews();
-        // 마우스 우클릭 금지
-document.addEventListener('contextmenu', event => event.preventDefault());
 
-// 드래그 및 복사 금지
-document.addEventListener('selectstart', event => event.preventDefault());
+        // 🔒 마우스 우클릭 금지
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
-// 키보드 보안 (F12 개발자 도구 및 Ctrl+C 방지)
-document.onkeydown = function(e) {
-    if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 67)) {
-        return false;
-    }
-};
+        // 🔒 드래그 및 복사 금지
+        document.addEventListener('selectstart', event => event.preventDefault());
+
+        // 🔒 키보드 보안 (F12, Ctrl+C, Ctrl+S 방지)
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || 
+                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
+                (e.ctrlKey && e.keyCode == 67) ||
+                (e.ctrlKey && e.keyCode == 83)) {
+                return false;
+            }
+        };
     </script>
 </body>
 </html>
