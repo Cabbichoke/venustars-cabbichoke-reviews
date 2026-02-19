@@ -40,17 +40,100 @@
         <input type="text" id="search-input" placeholder="키워드를 입력하세요 (예: 항암, 효과, 선물)" oninput="filterReviews()">
     </div>
 
-    <div id="status-msg">데이터 금고 연결 중...</div>
+    <div id="status-msg">데이터 금고(Firebase)에서 17,145개의 리뷰를 연결 중입니다...</div>
     <div id="reviews-container"></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        // ✅ 질문자님의 실제 파이어베이스 설정값
         const firebaseConfig = {
             apiKey: "AIzaSyBpqZEXkf6vq5cwpdeLADGTz8A0M3NKLjU",
             authDomain: "venustars.firebaseapp.com",
             projectId: "venustars",
             storageBucket: "venustars.firebasestorage.app",
             messagingSenderId: "171419456473",
-            appId: "1:1714194564
+            appId: "1:171419456473:web:d9b77b0608b5ef3201bfc8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        let allReviews = [];
+
+        // 🚀 실시간 데이터 로드 함수
+        async function loadReviews() {
+            const status = document.getElementById('status-msg');
+            try {
+                // 파이어베이스 'reviews' 컬렉션에서 17,145개를 통째로 가져옵니다.
+                const querySnapshot = await getDocs(collection(db, "reviews"));
+                allReviews = querySnapshot.docs.map(doc => doc.data());
+                
+                if (allReviews.length > 0) {
+                    status.innerText = `✅ 총 ${allReviews.length.toLocaleString()}개의 공식 리뷰가 성공적으로 연결되었습니다.`;
+                    renderReviews(allReviews.slice(0, 30)); // 초기화면 30개만
+                } else {
+                    status.innerText = "⚠️ 금고에 데이터가 비어있습니다. 업로드 확인이 필요합니다.";
+                }
+            } catch (e) {
+                status.innerText = "❌ 데이터 연결 실패: " + e.message;
+                console.error("Firebase Error:", e);
+            }
+        }
+
+        // 화면 렌더링 함수
+        window.renderReviews = function(dataList, searchTerm = "") {
+            const container = document.getElementById('reviews-container');
+            container.innerHTML = '';
+
+            dataList.forEach(data => {
+                // 한글/영어 필드명 모두 대응
+                let content = data['리뷰상세내용'] || data['reviews'] || data['content'] || '';
+                const author = data['등록자'] || data['id'] || '익명';
+                const date = data['리뷰등록일'] || data['date'] || '';
+                const rating = "⭐".repeat(parseInt(data['구매자 평점'] || 5));
+
+                if (searchTerm) {
+                    const regex = new RegExp(`(${searchTerm})`, "gi");
+                    content = content.toString().replace(regex, `<span class="highlight">$1</span>`);
+                }
+
+                const html = `
+                    <div class="review-card">
+                        <div class="card-inner">
+                            <span class="tag">공식 인증 후기</span>
+                            <span class="date">${date}</span>
+                            <div class="rating">${rating}</div>
+                            <p class="content">${content}</p>
+                            <div class="author">작성자: ${author.toString().substring(0, 3)}***</div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        };
+
+        // 실시간 검색 필터
+        window.filterReviews = function() {
+            const term = document.getElementById('search-input').value.trim().toLowerCase();
+            if (!term) {
+                renderReviews(allReviews.slice(0, 30));
+                return;
+            }
+            
+            const filtered = allReviews.filter(r => {
+                const text = (r['리뷰상세내용'] || r['reviews'] || r['content'] || '').toString().toLowerCase();
+                return text.includes(term);
+            });
+            
+            renderReviews(filtered, term);
+        };
+
+        loadReviews();
+
+        // 🔒 강력 보안 설정
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+    </script>
+</body>
+</html>
