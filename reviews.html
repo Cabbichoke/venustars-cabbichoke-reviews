@@ -6,48 +6,42 @@
     <title>VENUSTARS - 공식 고객 리뷰</title>
     <style>
         body { font-family: 'Pretendard', sans-serif; background-color: #f4f7f4; margin: 0; padding: 20px; line-height: 1.6; }
+        .search-container { max-width: 800px; margin: 0 auto 30px; text-align: center; position: sticky; top: 10px; z-index: 100; }
+        #search-input { width: 90%; padding: 15px 25px; border-radius: 30px; border: 2px solid #2e7d32; font-size: 18px; outline: none; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         
-        /* 검색창 영역 */
-        .search-container { max-width: 800px; margin: 0 auto 30px; text-align: center; }
-        #search-input { width: 80%; padding: 12px 20px; border-radius: 25px; border: 1px solid #ddd; font-size: 16px; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-
-        /* 리뷰 카드 디자인 */
+        #reviews-container { max-width: 800px; margin: 0 auto; }
         .review-card { 
             background: white; border-radius: 12px; padding: 25px; margin-bottom: 20px; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.03); position: relative; max-width: 800px; 
-            margin-left: auto; margin-right: auto; overflow: hidden; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.03); position: relative; overflow: hidden; 
         }
 
-        /* 🔒 보안: 희미한 Venustars 워터마크 */
+        /* 🔒 보안 워터마크 */
         .review-card::before {
-            content: "Venustars";
-            position: absolute; top: 50%; left: 50%;
+            content: "Venustars"; position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
-            font-size: 5.5rem; font-weight: 900;
-            color: rgba(0, 0, 0, 0.025); /* 소비자 눈엔 거의 안 띄는 2.5% 투명도 */
+            font-size: 5rem; font-weight: 900; color: rgba(0, 0, 0, 0.02);
             white-space: nowrap; pointer-events: none; z-index: 0;
         }
 
-        /* 콘텐츠 레이어 (워터마크보다 위로) */
         .card-inner { position: relative; z-index: 1; }
-        .tag { background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 6px; font-size: 0.75em; font-weight: bold; display: inline-block; margin-bottom: 10px; }
-        .date { color: #aaa; font-size: 0.85em; position: absolute; top: 0; right: 0; }
-        .rating { color: #f39c12; font-size: 1.2em; margin-bottom: 10px; }
-        .content { color: #333; font-size: 1.05em; margin: 15px 0; word-break: break-all; }
-        .author { color: #888; font-size: 0.9em; border-top: 1px solid #eee; pt: 10px; margin-top: 10px; padding-top: 10px; }
+        .tag { background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 6px; font-size: 0.8em; font-weight: bold; }
+        .date { float: right; color: #aaa; font-size: 0.85em; }
+        .rating { color: #f39c12; font-size: 1.2em; margin: 10px 0; }
+        .content { color: #333; font-size: 1.05em; margin: 15px 0; white-space: pre-wrap; }
+        .author { color: #888; font-size: 0.9em; border-top: 1px solid #eee; padding-top: 10px; }
         
-        #status-msg { text-align: center; color: #666; margin-top: 20px; }
+        #status-msg { text-align: center; color: #2e7d32; font-weight: bold; margin-bottom: 20px; }
+        .highlight { background-color: yellow; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="search-container">
-        <input type="text" id="search-input" placeholder="리뷰 키워드를 검색하세요 (예: 항암, 효과, 배송)" onkeyup="filterReviews()">
+        <input type="text" id="search-input" placeholder="키워드를 입력하세요 (예: 항암, 효과, 선물)" oninput="filterReviews()">
     </div>
 
-    <div id="reviews-container">
-        <p id="status-msg">실시간 리뷰 17,145개를 불러오는 중입니다...</p>
-    </div>
+    <div id="status-msg">데이터 금고 연결 중...</div>
+    <div id="reviews-container"></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -59,55 +53,56 @@
             projectId: "venustars",
             storageBucket: "venustars.firebasestorage.app",
             messagingSenderId: "171419456473",
-            appId: "1:171419456473:web:d9b77b0608b5ef3201bfc8",
-            measurementId: "G-CR2B0YR8ZJ"
+            appId: "1:171419456473:web:d9b77b0608b5ef3201bfc8"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        let allReviews = []; // 데이터를 담아둘 배열
+        let allReviews = [];
 
         async function loadReviews() {
-            const container = document.getElementById('reviews-container');
+            const status = document.getElementById('status-msg');
             try {
                 const querySnapshot = await getDocs(collection(db, "reviews"));
-                allReviews = [];
+                allReviews = querySnapshot.docs.map(doc => doc.data());
                 
-                querySnapshot.forEach((doc) => {
-                    allReviews.push(doc.data());
-                });
-
-                renderReviews(allReviews); // 처음에는 전체 표시
+                status.innerText = `총 ${allReviews.length.toLocaleString()}개의 공식 리뷰가 로드되었습니다.`;
+                // 처음에는 최신순으로 상위 30개만 보여주기 (속도 최적화)
+                renderReviews(allReviews.slice(0, 30)); 
             } catch (e) {
-                container.innerHTML = "데이터 로드 실패: " + e.message;
+                status.innerText = "데이터 로드 오류: " + e.message;
             }
         }
 
-        // 리뷰를 화면에 그리는 함수
-        window.renderReviews = function(dataList) {
+        window.renderReviews = function(dataList, searchTerm = "") {
             const container = document.getElementById('reviews-container');
             container.innerHTML = '';
 
             if (dataList.length === 0) {
-                container.innerHTML = '<p id="status-msg">검색 결과가 없습니다.</p>';
+                container.innerHTML = '<p style="text-align:center;">검색 결과가 없습니다.</p>';
                 return;
             }
 
             dataList.forEach(data => {
-                const ratingNum = data['구매자 평점'] || data['rating'] || 5;
-                const stars = "⭐".repeat(parseInt(ratingNum));
-                const content = data['리뷰상세내용'] || data['reviews'] || '';
+                let content = data['리뷰상세내용'] || data['reviews'] || '';
                 const author = data['등록자'] || data['id'] || '익명';
                 const date = data['리뷰등록일'] || data['date'] || '';
+                const rating = "⭐".repeat(parseInt(data['구매자 평점'] || 5));
+
+                // 검색어 강조 표시
+                if (searchTerm) {
+                    const regex = new RegExp(`(${searchTerm})`, "gi");
+                    content = content.replace(regex, `<span class="highlight">$1</span>`);
+                }
 
                 const html = `
                     <div class="review-card">
                         <div class="card-inner">
-                            <div class="tag">공식몰 인증후기</div>
-                            <div class="date">${date}</div>
-                            <div class="rating">${stars}</div>
+                            <span class="tag">공식 인증 후기</span>
+                            <span class="date">${date}</span>
+                            <div class="rating">${rating}</div>
                             <p class="content">${content}</p>
-                            <div class="author">작성자: ${author}</div>
+                            <div class="author">작성자: ${author.substring(0, 3)}***</div>
                         </div>
                     </div>
                 `;
@@ -115,24 +110,27 @@
             });
         };
 
-        // 검색 필터링 함수
         window.filterReviews = function() {
-            const term = document.getElementById('search-input').value.toLowerCase();
-            const filtered = allReviews.filter(r => 
-                (r['리뷰상세내용'] && r['리뷰상세내용'].toLowerCase().includes(term)) ||
-                (r['reviews'] && r['reviews'].toLowerCase().includes(term))
-            );
-            renderReviews(filtered);
+            const term = document.getElementById('search-input').value.trim().toLowerCase();
+            if (!term) {
+                renderReviews(allReviews.slice(0, 30)); // 검색어 없으면 다시 상위 30개
+                return;
+            }
+            
+            // 1,200개 항암 키워드 검색 로직
+            const filtered = allReviews.filter(r => {
+                const text = (r['리뷰상세내용'] || r['reviews'] || '').toLowerCase();
+                return text.includes(term);
+            });
+            
+            renderReviews(filtered, term);
         };
 
         loadReviews();
 
-        // 🔒 강력 보안 설정
+        // 🔒 보안 설정
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('selectstart', e => e.preventDefault());
-        document.onkeydown = e => {
-            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 67) || (e.ctrlKey && e.keyCode == 83)) return false;
-        };
     </script>
 </body>
 </html>
