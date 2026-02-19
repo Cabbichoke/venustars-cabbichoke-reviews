@@ -980,6 +980,27 @@ loadFullReviews();
 
 <!-- PWA Service Worker 등록 및 설치 스크립트 -->
 <script src="/pwa-install.js"></script>
+<script src="/pwa-install.js"></script>
 
+    <script>
+        // 1. 마우스 우클릭 금지
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // 2. 드래그 및 문구 선택 금지
+        document.addEventListener('selectstart', event => event.preventDefault());
+
+        // 3. 키보드 보안 (개발자 도구 F12, 복사 Ctrl+C, 저장 Ctrl+S 방지)
+        document.onkeydown = function(e) {
+            // F12(123), Ctrl+Shift+I(73), Ctrl+C(67), Ctrl+S(83)
+            if (e.keyCode == 123 || 
+                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
+                (e.ctrlKey && e.keyCode == 67) ||
+                (e.ctrlKey && e.keyCode == 83)) {
+                return false;
+            }
+        };
+    </script>
+</body>
+</html>
 </body>
 </html>
