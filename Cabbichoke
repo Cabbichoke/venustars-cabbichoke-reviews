@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venustars | Scientific Philosophy</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+    color: #2c2c2c;
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #1f3d2b;
+}
+
+h2 {
+    font-size: 22px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+    color: #1f3d2b;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+.quality-box {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #f4f7f5;
+    border-left: 4px solid #1f3d2b;
+}
+
+.footer-note {
+    margin-top: 60px;
+    font-size: 14px;
+    color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO IMAGE -->
+<div class="hero">
+    <img src="hero-cabbichoke.jpg" alt="Cabbichoke Plant-Based Formula">
+</div>
+
+<div class="container">
+
+<h1>우리는 세포 수준의 균형에서 건강을 바라봅니다</h1>
+
+<h2>세포 에너지와 식물성 영양의 과학</h2>
+
+<p>
+우리 몸의 모든 기능은 세포에서 이루어집니다.  
+세포 속 미토콘드리아는 에너지를 생성하며,  
+이 에너지 균형은 생리적 안정의 중요한 기반이 됩니다.
+</p>
+
+<p>
+야채에는 설포라판, 폴리페놀, 플라보노이드, 그리고 다양한 미네랄이 포함되어 있습니다.  
+이들 식물성 성분은 체내 항산화 네트워크를 지원하며,  
+세포 환경의 균형 유지와 관련된 연구가 보고되고 있습니다.
+</p>
+
+<h2>면역과 대사 균형</h2>
+
+<ul>
+<li>항산화 네트워크를 지원하고</li>
+<li>면역 균형 유지에 기여하며</li>
+<li>세포 에너지 환경을 안정적으로 유지하는 데 도움을 줄 수 있습니다</li>
+</ul>
+
+<p>
+이러한 세포 수준의 균형은  
+전반적인 대사 건강을 유지하는 중요한 기반이 됩니다.
+</p>
+
+<h2>차이는 설계에 있습니다</h2>
+
+<p>
+차이는 성분의 개수가 아니라,  
+어떤 고품질 원료를 선택하고 어떤 기준으로 설계했는가에 있습니다.
+</p>
+
+<p>
+캐비초크®는 식물성 원료의 출처와 품질 관리 기준을 검토하며,  
+완성된 제품은 제3 연구기관을 통해 GMO 여부를 확인합니다.
+</p>
+
+<p>
+원료의 특성과 조합을 고려하여  
+과학적 기반 위에서 정밀하게 설계된 포뮬러입니다.  
+이는 단순한 분말 혼합과는 다른 접근을 지향합니다.
+</p>
+
+<div class="quality-box">
+
+<h2>Venustars Four Quality Standards</h2>
+
+<ul>
+<li>🌿 VEGAN</li>
+<li>🌾 GLUTEN FREE</li>
+<li>🧬 GMO TESTED</li>
+<li>🧂 NO PRESERVATIVES</li>
+</ul>
+
+<p>
+매 생산 배치마다 완성된 제품은 제3 연구기관에 의뢰되어  
+위 기준을 확인합니다.  
+해당 기준을 충족하지 않는 제품은 출고되지 않습니다.
+</p>
+
+</div>
+
+<p class="footer-note">
+본 자료는 일반적인 영양학적 정보를 제공하기 위한 설명입니다.  
+제품은 질병의 진단, 치료 또는 예방을 목적으로 하지 않습니다.
+</p>
+
+</div>
+
+</body>
+</html>
