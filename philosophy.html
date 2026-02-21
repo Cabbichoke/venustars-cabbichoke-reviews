@@ -1,148 +1,307 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Venustars | Scientific Philosophy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VENUSTARS | Scientific Philosophy</title>
+  <meta name="description" content="세포 에너지와 식물성 영양의 과학. Venustars의 설계 철학과 품질 기준을 소개합니다.">
 
-<style>
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.7;
-    color: #2c2c2c;
-    background-color: #ffffff;
-}
+  <style>
+    :root{
+      --green-deep:#1a5c3a;
+      --green-mid:#2d7a52;
+      --green-light:#e8f5ee;
+      --text-dark:#1a1a1a;
+      --text-light:#666;
+      --border:#e6eee9;
+      --bg:#ffffff;
+    }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 60px 20px;
-}
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background:var(--bg);
+      color:var(--text-dark);
+      line-height:1.75;
+    }
 
-.hero img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+    .hero{
+      width:100%;
+      background:#fff;
+    }
+    .hero img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
 
-h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-    color: #1f3d2b;
-}
+    .wrap{
+      max-width:900px;
+      margin:0 auto;
+      padding:56px 20px 80px;
+    }
 
-h2 {
-    font-size: 22px;
-    margin-top: 50px;
-    margin-bottom: 15px;
-    color: #1f3d2b;
-}
+    .kicker{
+      color:var(--green-mid);
+      font-weight:700;
+      letter-spacing:0.2px;
+      margin:0 0 10px;
+      font-size:14px;
+    }
 
-ul {
-    padding-left: 20px;
-}
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(26px, 5vw, 36px);
+      color:var(--green-deep);
+      line-height:1.25;
+    }
 
-li {
-    margin-bottom: 8px;
-}
+    h2{
+      margin:46px 0 14px;
+      font-size:clamp(18px, 3.4vw, 22px);
+      color:var(--green-deep);
+      line-height:1.35;
+    }
 
-.quality-box {
-    margin-top: 40px;
-    padding: 30px;
-    background-color: #f4f7f5;
-    border-left: 4px solid #1f3d2b;
-}
+    p{margin:0 0 14px;}
 
-.footer-note {
-    margin-top: 60px;
-    font-size: 14px;
-    color: #666;
-}
-</style>
+    .divider{
+      margin:32px 0 4px;
+      height:1px;
+      background:var(--border);
+    }
+
+    ul{
+      margin:10px 0 0;
+      padding:0 0 0 18px;
+    }
+    li{margin:6px 0;}
+
+    .essence{
+      margin:34px 0 10px;
+      padding:22px 18px;
+      border:1px solid var(--border);
+      border-left:5px solid var(--green-deep);
+      border-radius:14px;
+      background:linear-gradient(135deg, var(--green-light), #fff);
+    }
+    .essence .title{
+      margin:0 0 10px;
+      font-weight:800;
+      color:var(--green-deep);
+      font-size:16px;
+    }
+    .essence .subtitle{
+      margin:0 0 14px;
+      font-weight:700;
+      color:#244a36;
+      font-size:14px;
+      opacity:0.95;
+    }
+    .essence p{
+      margin:0 0 12px;
+      color:#203528;
+    }
+
+    .quote{
+      margin:18px 0 0;
+      padding-left:14px;
+      border-left:3px solid rgba(26,92,58,0.35);
+      color:#2a3d32;
+      font-weight:600;
+    }
+
+    .quality{
+      margin-top:26px;
+      padding:22px 18px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#f7fbf8;
+    }
+    .quality-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+    .qitem{
+      padding:12px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#1c2b22;
+      font-weight:700;
+    }
+    .qitem span{
+      font-weight:800;
+      color:var(--green-deep);
+      min-width:28px;
+      text-align:center;
+    }
+
+    .note{
+      margin-top:34px;
+      padding-top:18px;
+      border-top:1px solid var(--border);
+      color:var(--text-light);
+      font-size:13px;
+    }
+
+    .back{
+      margin-top:28px;
+    }
+    .back a{
+      display:inline-block;
+      text-decoration:none;
+      color:var(--green-deep);
+      font-weight:700;
+      border:1px solid var(--border);
+      padding:10px 14px;
+      border-radius:10px;
+      background:#fff;
+    }
+    .back a:hover{
+      border-color:rgba(26,92,58,0.35);
+      background:var(--green-light);
+    }
+
+    @media (max-width:640px){
+      .wrap{padding:40px 18px 70px;}
+      .quality-grid{grid-template-columns:1fr;}
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HERO IMAGE -->
-<div class="hero">
-    <img src="hero-cabbichoke.jpg" alt="Cabbichoke Plant-Based Formula">
-</div>
+  <!-- HERO IMAGE (1장만 사용) -->
+  <div class="hero">
+    <img src="./hero-cabbichoke.jpg" alt="VENUSTARS Plant-Based Formula">
+  </div>
 
-<div class="container">
+  <main class="wrap">
+    <div class="kicker">VENUSTARS • Scientific Philosophy</div>
+    <h1>🌿 우리는 세포 수준의 균형에서 건강을 바라봅니다</h1>
 
-<h1>우리는 세포 수준의 균형에서 건강을 바라봅니다</h1>
+    <div class="divider"></div>
 
-<h2>세포 에너지와 식물성 영양의 과학</h2>
+    <h2>세포 에너지와 식물성 영양의 과학</h2>
+    <p>
+      우리 몸의 모든 기능은 세포에서 이루어집니다.<br>
+      세포 속 미토콘드리아는 에너지를 생성하며,<br>
+      이 에너지 균형은 생리적 안정의 중요한 기반이 됩니다.
+    </p>
 
-<p>
-우리 몸의 모든 기능은 세포에서 이루어집니다.  
-세포 속 미토콘드리아는 에너지를 생성하며,  
-이 에너지 균형은 생리적 안정의 중요한 기반이 됩니다.
-</p>
+    <p>
+      야채에는 설포라판, 폴리페놀, 플라보노이드,<br>
+      그리고 다양한 미네랄이 포함되어 있습니다.
+    </p>
 
-<p>
-야채에는 설포라판, 폴리페놀, 플라보노이드, 그리고 다양한 미네랄이 포함되어 있습니다.  
-이들 식물성 성분은 체내 항산화 네트워크를 지원하며,  
-세포 환경의 균형 유지와 관련된 연구가 보고되고 있습니다.
-</p>
+    <p>
+      이들 식물성 성분은 체내 항산화 네트워크를 지원하며,<br>
+      세포 환경의 균형 유지와 관련된 연구가 보고되고 있습니다.
+    </p>
 
-<h2>면역과 대사 균형</h2>
+    <div class="divider"></div>
 
-<ul>
-<li>항산화 네트워크를 지원하고</li>
-<li>면역 균형 유지에 기여하며</li>
-<li>세포 에너지 환경을 안정적으로 유지하는 데 도움을 줄 수 있습니다</li>
-</ul>
+    <h2>면역과 대사 균형</h2>
+    <p>건강하고 검증된 식물성 원료의 섭취는</p>
+    <ul>
+      <li>항산화 네트워크를 지원하고</li>
+      <li>면역 균형 유지에 기여하며</li>
+      <li>세포 에너지 환경을 안정적으로 유지하는 데 도움을 줄 수 있습니다.</li>
+    </ul>
+    <p style="margin-top:12px;">
+      이러한 세포 수준의 균형은<br>
+      전반적인 대사 건강을 유지하는 중요한 기반이 됩니다.
+    </p>
 
-<p>
-이러한 세포 수준의 균형은  
-전반적인 대사 건강을 유지하는 중요한 기반이 됩니다.
-</p>
+    <!-- ESSENCE (사용자 원문 그대로) -->
+    <section class="essence" aria-label="The Essence">
+      <div class="title">🌿 [The Essence: Groundwork for Balance]</div>
+      <div class="subtitle">비우고 정돈하는 '기초의 과학'</div>
 
-<h2>차이는 설계에 있습니다</h2>
+      <p>
+        우리 몸의 세포가 외부로부터 들어오는 다양한 성분을 오롯이 받아들이기 위해서는,
+        먼저 식물 영양을 통한 깨끗한 환경 조성이 필요합니다.
+      </p>
 
-<p>
-차이는 성분의 개수가 아니라,  
-어떤 고품질 원료를 선택하고 어떤 기준으로 설계했는가에 있습니다.
-</p>
+      <p>
+        캐비초크는 무작정 '채우기' 이전에 우리 몸의 근본적인 환경을 정돈하는 과정'에 집중합니다.
+      </p>
 
-<p>
-캐비초크®는 식물성 원료의 출처와 품질 관리 기준을 검토하며,  
-완성된 제품은 제3 연구기관을 통해 GMO 여부를 확인합니다.
-</p>
+      <p>
+        아티초크와 양배추라는 검증된 식물 원료를 기반으로,
+        단순히 섞는 것을 넘어 세포 에너지 환경을 고려해 정밀하게 설계된 포뮬러—
+      </p>
 
-<p>
-원료의 특성과 조합을 고려하여  
-과학적 기반 위에서 정밀하게 설계된 포뮬러입니다.  
-이는 단순한 분말 혼합과는 다른 접근을 지향합니다.
-</p>
+      <p>
+        바쁜 일상 속 무너진 신체 밸런스, 단순히 양을 채우는 것이 아니라
+        세포가 스스로 생동감을 찾을 수 있는 '토양'을 만드는 것.
+        이것이 캐비초크가 지향하는 진정한 프리미엄의 시작입니다.
+      </p>
+    </section>
 
-<div class="quality-box">
+    <div class="divider"></div>
 
-<h2>Venustars Four Quality Standards</h2>
+    <h2>차이는 설계에 있습니다</h2>
+    <p class="quote">
+      차이는 성분의 개수가 아니라,<br>
+      어떤 고품질 원료를 선택하고 어떤 기준으로 설계했는가에 있습니다.
+    </p>
 
-<ul>
-<li>🌿 VEGAN</li>
-<li>🌾 GLUTEN FREE</li>
-<li>🧬 GMO TESTED</li>
-<li>🧂 NO PRESERVATIVES</li>
-</ul>
+    <p style="margin-top:16px;">
+      캐비초크®는<br>
+      식물성 원료의 출처와 품질 관리 기준을 검토하며,<br>
+      완성된 제품은 제3 연구기관을 통해 GMO 여부를 확인합니다.
+    </p>
 
-<p>
-매 생산 배치마다 완성된 제품은 제3 연구기관에 의뢰되어  
-위 기준을 확인합니다.  
-해당 기준을 충족하지 않는 제품은 출고되지 않습니다.
-</p>
+    <p>
+      원료의 특성과 조합을 고려하여<br>
+      과학적 기반 위에서 정밀하게 설계된 포뮬러입니다.
+    </p>
 
-</div>
+    <p>이는 단순한 분말 혼합과는 다른 접근을 지향합니다.</p>
 
-<p class="footer-note">
-본 자료는 일반적인 영양학적 정보를 제공하기 위한 설명입니다.  
-제품은 질병의 진단, 치료 또는 예방을 목적으로 하지 않습니다.
-</p>
+    <div class="divider"></div>
 
-</div>
+    <h2>Venustars Four Quality Standards</h2>
 
+    <p>
+      매 생산 배치마다 완성된 제품은<br>
+      제3 연구기관에 의뢰되어 다음 기준을 확인합니다.
+    </p>
+
+    <section class="quality" aria-label="Quality Standards">
+      <div class="quality-grid">
+        <div class="qitem"><span>🌿</span>VEGAN</div>
+        <div class="qitem"><span>🌾</span>GLUTEN FREE</div>
+        <div class="qitem"><span>🧬</span>GMO TESTED</div>
+        <div class="qitem"><span>🧂</span>NO PRESERVATIVES</div>
+      </div>
+
+      <p style="margin-top:14px;">
+        해당 기준을 충족하지 않는 제품은 출고되지 않습니다.
+      </p>
+      <p style="margin:0;">
+        이 네 가지 원칙은 Venustars의 품질 관리 철학을 구성하는 핵심 기준입니다.
+      </p>
+    </section>
+
+    <div class="note">
+      <strong>안내 문구</strong><br>
+      본 자료는 일반적인 영양학적 정보를 제공하기 위한 설명입니다.<br>
+      제품은 질병의 진단, 치료 또는 예방을 목적으로 하지 않습니다.
+    </div>
+
+    <div class="back">
+      <a href="./index.html">← 리뷰 메인으로 돌아가기</a>
+    </div>
+
+  </main>
 </body>
 </html>
