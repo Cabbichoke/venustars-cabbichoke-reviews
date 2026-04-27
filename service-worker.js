@@ -10,7 +10,7 @@
 // ─── 버전 관리 ───────────────────────────────────────────────
 // 파일을 수정할 때마다 아래 버전 숫자를 올려주세요.
 // 그러면 이전 캐시가 자동으로 삭제되고 새 파일이 캐시됩니다.
-const CACHE_VERSION = 4;
+const CACHE_VERSION = 5;
 const SHELL_CACHE   = `venustars-shell-v${CACHE_VERSION}`;
 const DATA_CACHE    = `venustars-data-v${CACHE_VERSION}`;
 
