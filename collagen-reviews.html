@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>콜라겐 후기 총 4,278개 보기 및 검색</title>
+<meta property="og:title" content="콜라겐 후기 총 4,278개 보기 및 검색">
+<meta property="og:description" content="베누스타스 저분자 피쉬 콜라겐 10,000mg 실제 구매 고객 후기. 피부 탄력, 주름, 관절 등 증상별 검색 가능.">
+<meta property="og:image" content="https://cabbichoke.github.io/venustars-cabbichoke-reviews/penguin.png">
+<meta property="og:url" content="https://cabbichoke.github.io/venustars-cabbichoke-reviews/collagen-reviews.html">
+<meta property="og:type" content="website">
+<meta name="description" content="베누스타스 저분자 피쉬 콜라겐 10,000mg 실제 구매 고객 후기 검색. 피부, 관절, 주름, 탄력 등 증상별 후기를 찾아보세요.">
+<style>
+  :root {
+    --green: #1a5c3a;
+    --green-light: #e8f5ee;
+    --green-mid: #2d7a52;
+    --gold: #c8953a;
+    --border: #d0e8d8;
+    --text: #222;
+    --text-mid: #555;
+    --text-light: #888;
+    --bg: #f4faf6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* 헤더 */
+  .header {
+    background: var(--green);
+    padding: 28px 20px 24px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 16px;
+  }
+
+  /* 검색창 */
+  .search-wrap {
+    display: flex;
+    gap: 8px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .search-input {
+    flex: 1;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    outline: none;
+    font-family: inherit;
+  }
+  .search-btn {
+    padding: 11px 20px;
+    background: var(--gold);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+
+  /* 태그 필터 */
+  .tag-wrap {
+    max-width: 600px;
+    margin: 14px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    justify-content: center;
+  }
+  .tag-btn {
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .tag-btn.active {
+    background: white;
+    color: var(--green);
+    border-color: white;
+    font-weight: 700;
+  }
+
+  /* 콘텐츠 */
+  .content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+  }
+
+  /* 통계 바 */
+  .stats-bar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .stats-total {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green);
+  }
+  .stats-sub {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-left: auto;
+  }
+
+  /* 리뷰 카드 */
+  .review-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 18px 14px;
+    margin-bottom: 12px;
+    animation: fadeIn 0.2s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .best-badge {
+    background: var(--gold);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .card-meta {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  .card-author { font-weight: 600; color: var(--text-mid); }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 9px;
+  }
+  .card-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: var(--green-light);
+    color: var(--green);
+    border-radius: 10px;
+    font-weight: 600;
+  }
+
+  .card-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.85;
+    white-space: pre-wrap;
+    word-break: keep-all;
+  }
+  .card-text mark {
+    background: #fff3b0;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+
+  /* 로딩/빈 상태 */
+  .loading, .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+    font-size: 14px;
+  }
+  .empty-icon { font-size: 36px; margin-bottom: 12px; }
+
+  /* 더보기 */
+  .load-more {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 4px;
+  }
+  .load-more:hover { background: var(--green-light); }
+
+  /* 헤더 구매 버튼 */
+  .header-buy-btn {
+    display: inline-block;
+    margin: 12px auto 0;
+    padding: 9px 22px;
+    background: var(--gold);
+    color: white;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+  }
+
+  /* 스토어 링크 */
+  .store-link {
+    display: block;
+    text-align: center;
+    margin: 24px 0 0;
+    padding: 14px;
+    background: var(--green);
+    color: white;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  /* 상단 여백 */
+  .header-spacer { height: 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">VENUSTARS® · 콜라겐 10,000mg</div>
+  <h1>실제 고객 후기 검색</h1>
+  <div class="header-sub">베누스타스 저분자 피쉬 콜라겐 · 구매 인증 후기만 수록</div>
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput"
+      placeholder="피부, 주름, 관절, 탄력..." autocomplete="off">
+    <button class="search-btn" onclick="doSearch()">검색</button>
+  </div>
+  <div class="tag-wrap" id="tagWrap"></div>
+  <a class="header-buy-btn"
+     href="https://smartstore.naver.com/venustars/products/3203612555"
+     target="_blank" rel="noopener">🛒 네이버 스마트스토어에서 구매하기</a>
+</div>
+
+<div class="content">
+  <div class="stats-bar" id="statsBar">
+    <span class="stats-total" id="statsTotal">불러오는 중...</span>
+    <span class="stats-sub" id="statsSub"></span>
+  </div>
+  <div id="reviewList"><div class="loading">후기를 불러오는 중입니다...</div></div>
+  <button class="load-more" id="loadMoreBtn" style="display:none" onclick="loadMore()">후기 더 보기 ↓</button>
+  <a class="store-link" href="https://smartstore.naver.com/venustars/products/3203612555"
+     target="_blank" rel="noopener">🛒 네이버 스마트스토어에서 구매하기</a>
+</div>
+
+<script>
+const BEST_URL = 'reviews_collagen_best.json';
+const ALL_URL  = 'reviews_collagen_all.json';
+const PAGE_SIZE = 20;
+
+let allReviews = [];
+let filtered   = [];
+let page       = 0;
+let currentTag = '';
+let currentQuery = '';
+
+// 태그 목록
+const TAGS = ['피부/미용', '관절/뼈', '모발/두피', '소화/장', '면역', '수면', '피로회복', '눈건강'];
+
+async function init() {
+  try {
+    const [bestRes, allRes] = await Promise.all([
+      fetch(BEST_URL), fetch(ALL_URL)
+    ]);
+    const best = await bestRes.json();
+    const all  = await allRes.json();
+
+    // 베스트 먼저, 날짜 역순
+    const bestSorted = best.sort((a,b) => b.date.localeCompare(a.date));
+    const allSorted  = all.sort((a,b) => b.date.localeCompare(a.date));
+    allReviews = [...bestSorted, ...allSorted];
+
+    document.getElementById('statsTotal').textContent =
+      `콜라겐 후기 총 ${allReviews.length.toLocaleString()}개`;
+    document.getElementById('statsSub').textContent =
+      `베스트 ${best.length}개 · 일반 ${all.length}개`;
+
+    renderTags();
+    applyFilter();
+  } catch(e) {
+    document.getElementById('reviewList').innerHTML =
+      '<div class="empty"><div class="empty-icon">⚠️</div>후기를 불러올 수 없습니다.</div>';
+  }
+}
+
+function renderTags() {
+  const wrap = document.getElementById('tagWrap');
+  wrap.innerHTML = '';
+  TAGS.forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'tag-btn' + (tag === currentTag ? ' active' : '');
+    btn.textContent = tag;
+    btn.onclick = () => toggleTag(tag);
+    wrap.appendChild(btn);
+  });
+}
+
+function toggleTag(tag) {
+  currentTag = currentTag === tag ? '' : tag;
+  renderTags();
+  applyFilter();
+}
+
+function doSearch() {
+  currentQuery = document.getElementById('searchInput').value.trim();
+  applyFilter();
+}
+
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+
+function applyFilter() {
+  const q = currentQuery.toLowerCase();
+  filtered = allReviews.filter(r => {
+    const tagMatch = !currentTag || (r.tags && r.tags.includes(currentTag));
+    const textMatch = !q ||
+      r.text.toLowerCase().includes(q) ||
+      (r.author && r.author.toLowerCase().includes(q));
+    return tagMatch && textMatch;
+  });
+
+  page = 0;
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div>검색 결과가 없습니다.<br>다른 키워드로 검색해보세요.</div>';
+    document.getElementById('loadMoreBtn').style.display = 'none';
+    document.getElementById('statsTotal').textContent = `검색 결과 0개`;
+    document.getElementById('statsSub').textContent = `"${currentQuery}"`;
+    return;
+  }
+
+  document.getElementById('statsTotal').textContent =
+    q || currentTag
+      ? `검색 결과 ${filtered.length.toLocaleString()}개`
+      : `콜라겐 후기 총 ${allReviews.length.toLocaleString()}개`;
+  document.getElementById('statsSub').textContent =
+    q ? `"${currentQuery}" 검색 결과` :
+    currentTag ? `#${currentTag}` :
+    `베스트 ${allReviews.filter(r=>r.best).length}개 포함`;
+
+  renderPage();
+}
+
+function renderPage() {
+  const list = document.getElementById('reviewList');
+  const slice = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+
+  slice.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'review-card';
+
+    const tagsHtml = (r.tags && r.tags.length)
+      ? `<div class="card-tags">${r.tags.map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>`
+      : '';
+
+    const text = highlight(escapeHtml(r.text), currentQuery);
+
+    card.innerHTML = `
+      <div class="card-top">
+        ${r.best ? '<span class="best-badge">⭐ 베스트</span>' : ''}
+        <div class="card-meta">
+          <span class="card-author">${r.author}</span> · ${r.date} · ⭐ ${r.rating}
+        </div>
+      </div>
+      ${tagsHtml}
+      <div class="card-text">${text}</div>
+    `;
+    list.appendChild(card);
+  });
+
+  page++;
+  const hasMore = page * PAGE_SIZE < filtered.length;
+  document.getElementById('loadMoreBtn').style.display = hasMore ? 'block' : 'none';
+}
+
+function loadMore() {
+  renderPage();
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function highlight(text, query) {
+  if (!query) return text;
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return text.replace(new RegExp(escaped, 'gi'), m => `<mark>${m}</mark>`);
+}
+
+init();
+</script>
+</body>
+</html>
