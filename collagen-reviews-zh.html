@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VENUSTARS 胶原蛋白用户评价搜索 | 50条真实购买评价</title>
+<meta name="description" content="VENUSTARS低分子鱼胶原蛋白10,000mg真实购买用户评价搜索。皮肤、关节、脱发等按症状搜索评价。">
+<meta property="og:title" content="VENUSTARS 胶原蛋白 50条真实评价搜索">
+<meta property="og:description" content="皮肤弹性、关节疼痛、脱发改善……真实购买用户的亲身体验。">
+<meta property="og:image" content="https://cabbichoke.github.io/venustars-cabbichoke-reviews/penguin.png">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --green: #1a5c3a;
+    --green-light: #e8f5ee;
+    --green-mid: #2d7a52;
+    --gold: #c8953a;
+    --border: #d0e8d8;
+    --text: #222;
+    --text-mid: #555;
+    --text-light: #888;
+    --bg: #f4faf6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: var(--green);
+    padding: 28px 20px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .header-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 14px;
+  }
+  .search-wrap {
+    display: flex;
+    gap: 8px;
+    max-width: 500px;
+    margin: 0 auto 10px;
+  }
+  .search-input {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+  }
+  .search-btn {
+    padding: 10px 18px;
+    background: var(--gold);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .header-buy {
+    display: inline-block;
+    margin: 8px auto 0;
+    padding: 8px 20px;
+    background: var(--gold);
+    color: white;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .tag-wrap {
+    max-width: 560px;
+    margin: 10px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+  .tag-btn {
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .tag-btn.active {
+    background: white;
+    color: var(--green);
+    border-color: white;
+    font-weight: 700;
+  }
+
+  .content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 16px 16px 60px;
+  }
+
+  .stats-bar {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .stats-total { font-size: 14px; font-weight: 700; color: var(--green); }
+  .stats-sub { font-size: 12px; color: var(--text-light); margin-left: auto; }
+
+  .beta-notice {
+    background: #fff8e8;
+    border: 1px solid #f5d9a0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    color: #8b6200;
+    line-height: 1.6;
+  }
+
+  .review-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px 13px;
+    margin-bottom: 10px;
+  }
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .best-badge {
+    background: var(--gold);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .card-meta { font-size: 12px; color: var(--text-light); line-height: 1.6; }
+  .card-author { font-weight: 600; color: var(--text-mid); }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .card-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    background: var(--green-light);
+    color: var(--green);
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .card-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.85;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .card-text mark { background: #fff3b0; border-radius: 2px; padding: 0 1px; }
+
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+    font-size: 14px;
+  }
+  .empty-icon { font-size: 36px; margin-bottom: 12px; }
+
+  .load-more {
+    display: block;
+    width: 100%;
+    padding: 13px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 4px;
+  }
+  .store-link {
+    display: block;
+    text-align: center;
+    margin: 20px 0 0;
+    padding: 14px;
+    background: var(--green);
+    color: white;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">VENUSTARS® · 胶原蛋白 10,000mg</div>
+  <h1>真实用户评价搜索</h1>
+  <div class="header-sub">低分子鱼胶原蛋白 · 仅收录购买认证评价</div>
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput"
+      placeholder="皮肤、皱纹、关节、脱发..." autocomplete="off">
+    <button class="search-btn" onclick="doSearch()">搜索</button>
+  </div>
+  <a class="header-buy"
+     href="https://smartstore.naver.com/venustars/products/3203612555"
+     target="_blank" rel="noopener">🛒 韩国官方购买</a>
+  <div class="tag-wrap" id="tagWrap"></div>
+</div>
+
+<div class="content">
+  <div class="stats-bar">
+    <span class="stats-total" id="statsTotal">加载中...</span>
+    <span class="stats-sub" id="statsSub"></span>
+  </div>
+  <div class="beta-notice">
+    📢 <strong>精选版</strong> — 收录453条精选评价（中文翻译版）。
+  </div>
+  <div id="reviewList"></div>
+  <button class="load-more" id="loadMoreBtn" style="display:none" onclick="loadMore()">查看更多评价 ↓</button>
+  <a class="store-link"
+     href="https://smartstore.naver.com/venustars/products/3203612555"
+     target="_blank" rel="noopener">🛒 前往韩国官方旗舰店购买</a>
+</div>
+
+<script>
+const DATA_URL = 'reviews_collagen_zh_beta.json';
+const PAGE_SIZE = 15;
+const TAGS = ['皮肤/美容','关节/骨骼','头发/头皮','消化/肠道','免疫力','睡眠','消除疲劳','眼睛健康','抗癌'];
+
+let allReviews = [];
+let filtered = [];
+let page = 0;
+let currentTag = '';
+let currentQuery = '';
+
+async function init() {
+  try {
+    const res = await fetch(DATA_URL);
+    allReviews = await res.json();
+    document.getElementById('statsTotal').textContent = `胶原蛋白评价 共 ${allReviews.length} 条`;
+    document.getElementById('statsSub').textContent = `精选优质评价`;
+    renderTags();
+    applyFilter();
+  } catch(e) {
+    document.getElementById('reviewList').innerHTML =
+      '<div class="empty"><div class="empty-icon">⚠️</div>加载失败，请刷新页面重试。</div>';
+  }
+}
+
+function renderTags() {
+  const wrap = document.getElementById('tagWrap');
+  wrap.innerHTML = '';
+  TAGS.forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'tag-btn' + (tag === currentTag ? ' active' : '');
+    btn.textContent = tag;
+    btn.onclick = () => { currentTag = currentTag === tag ? '' : tag; renderTags(); applyFilter(); };
+    wrap.appendChild(btn);
+  });
+}
+
+function doSearch() {
+  currentQuery = document.getElementById('searchInput').value.trim();
+  applyFilter();
+}
+
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+
+function applyFilter() {
+  const q = currentQuery.toLowerCase();
+  filtered = allReviews.filter(r => {
+    const tagMatch = !currentTag || (r.tags_zh && r.tags_zh.includes(currentTag));
+    const textMatch = !q || r.text_zh.toLowerCase().includes(q) || r.text.toLowerCase().includes(q);
+    return tagMatch && textMatch;
+  });
+
+  page = 0;
+  document.getElementById('reviewList').innerHTML = '';
+
+  if (filtered.length === 0) {
+    document.getElementById('reviewList').innerHTML =
+      '<div class="empty"><div class="empty-icon">🔍</div>没有找到相关评价。<br>请尝试其他关键词。</div>';
+    document.getElementById('loadMoreBtn').style.display = 'none';
+    document.getElementById('statsTotal').textContent = `搜索结果 0 条`;
+    return;
+  }
+
+  document.getElementById('statsTotal').textContent =
+    q || currentTag ? `搜索结果 ${filtered.length} 条` : `胶原蛋白评价 共 ${allReviews.length} 条`;
+  document.getElementById('statsSub').textContent =
+    q ? `"${currentQuery}" 搜索结果` : currentTag ? `#${currentTag}` : `精选优质评价`;
+
+  renderPage();
+}
+
+function renderPage() {
+  const list = document.getElementById('reviewList');
+  const slice = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+
+  slice.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    const tagsHtml = (r.tags_zh && r.tags_zh.length)
+      ? `<div class="card-tags">${r.tags_zh.map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>` : '';
+    const text = highlight(escHtml(r.text_zh || r.text), currentQuery);
+    card.innerHTML = `
+      <div class="card-top">
+        ${r.best ? '<span class="best-badge">⭐ 精选</span>' : ''}
+        <div class="card-meta"><span class="card-author">${r.author}</span> · ${r.date} · ⭐ ${r.rating}</div>
+      </div>
+      ${tagsHtml}
+      <div class="card-text">${text}</div>`;
+    list.appendChild(card);
+  });
+
+  page++;
+  document.getElementById('loadMoreBtn').style.display =
+    page * PAGE_SIZE < filtered.length ? 'block' : 'none';
+}
+
+function loadMore() { renderPage(); }
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function highlight(text, q) {
+  if (!q) return text;
+  return text.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi'), m => `<mark>${m}</mark>`);
+}
+
+init();
+</script>
+</body>
+</html>
